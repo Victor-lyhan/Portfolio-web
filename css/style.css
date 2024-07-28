@@ -217,3 +217,11 @@ section {
     border-bottom: 390px solid var(--main-color);
     border-left: 390px solid transparent;
 }
+
+.home-img img {
+    position: absolute;
+    bottom: -10px;
+    right: 110px;
+    width: 23%;
+    pointer-events: none;
+}
