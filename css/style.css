@@ -120,7 +120,7 @@ section {
 }
 
 .home .home-content {
-    max-width: 44rem;
+    max-width: 49rem;
 }
 
 .home-content h3 {
@@ -132,6 +132,7 @@ section {
 .home-content h1 {
     font-size: 5.6rem;
     font-weight: 700;
+    color: var(--main-color);
     margin-bottom: .3rem;
 }
 
