@@ -2541,3 +2541,126 @@ input:-webkit-autofill:active {
 
 
 .tl-col, .tl-item, .tl-card { z-index: 2; }        /* cards on top */
+
+/* ---------- Footprint timeline (scoped) ---------- */
+.footprint .ftl{
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footprint .ftl-rail{
+  position: absolute; left: 50%; top: 0; bottom: 0; transform: translateX(-1px);
+  width: 2px;
+  background: linear-gradient(180deg, transparent, rgba(var(--n4),0.15) 10%, rgba(var(--n4),0.15) 90%, transparent);
+  z-index: 0;
+}
+.footprint .ftl-year{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin: 48px 0 64px;
+  z-index: 1;
+}
+.footprint .ftl-year-label{
+  position: absolute; left: 50%; top: -12px; transform: translate(-50%, -100%);
+  display:flex; align-items:center; gap:10px;
+}
+.footprint .ftl-year-label h3{
+  margin:0; font-size:22px; font-weight:800; color: rgba(var(--n5),1);
+}
+.footprint .ftl-dot{
+  width:14px; height:14px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #a5f3fc, #38bdf8);
+  box-shadow: 0 0 0 4px rgba(56,189,248,.15), 0 6px 18px rgba(56,189,248,.35);
+}
+
+/* columns */
+.footprint .ftl-col{ display:grid; gap:14px; }
+.footprint .ftl-left{ grid-column:1/2; padding-right:40px; }
+.footprint .ftl-right{ grid-column:2/3; padding-left:40px; }
+
+/* cards */
+.footprint .ftl-card{
+  border-radius: 18px;
+  border: 1px solid rgba(var(--n4),0.16);
+  box-shadow: 0 10px 25px rgba(2,6,23,.08);
+  backdrop-filter: blur(6px);
+}
+.footprint .ftl-event{
+  background: linear-gradient(180deg, rgba(var(--n1),.9), rgba(var(--n1),.85));
+  padding: 16px 18px;
+}
+.footprint .ftl-event h4{
+  margin:0 0 6px; font-size:14px; letter-spacing:.3px;
+  color: rgba(var(--p1),1); text-transform:uppercase;
+}
+.footprint .ftl-event ul{ margin:0; padding:0 0 0 18px; }
+.footprint .ftl-event li{ margin:6px 0; line-height:1.5; color: rgba(var(--n5),1); }
+
+.footprint .ftl-lesson{
+  background: linear-gradient(180deg, rgba(34,211,238,.16), rgba(34,211,238,.05));
+  border: 1px solid rgba(34,211,238,.45);
+  color:#0b3d46; /* readable on both themes due to bg */
+  padding:14px 16px; font-style:italic;
+}
+
+/* hover pairing: light glow */
+.footprint .ftl-card:hover{
+  box-shadow: 0 10px 30px rgba(82,113,255,.18), 0 0 0 2px rgba(var(--p1),.15) inset;
+}
+
+.footprint .ftl-card.is-linked{
+  outline: 2px solid rgba(var(--p1),.35);
+  transform: translateY(-2px);
+  transition: outline .2s ease, transform .2s ease;
+}
+
+
+/* responsive */
+@media (max-width: 991px){
+  .footprint .ftl-year{
+    grid-template-columns: 1fr;
+    padding-left: 44px;
+  }
+  .footprint .ftl-rail{ left: 24px; }
+  .footprint .ftl-year-label{ left:24px; transform: translate(0,-100%); }
+  .footprint .ftl-left, .footprint .ftl-right{
+    grid-column: 1 / -1; padding:0;
+  }
+}
+
+/* --- Fix stretching / big empty space in cards --- */
+.ftl-year {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;              /* don't stretch rows */
+}
+
+.ftl-col {
+  display: grid;
+  gap: 16px;
+  align-content: start;            /* pack to top */
+}
+
+.ftl-card {
+  align-self: start;               /* each card hugs its content */
+  height: auto;                    /* ensure no fixed height sneaks in */
+}
+
+/* If you previously added any min-height/height to .ftl-year/.ftl-card, remove it */
+
+/* --- Restore bullets in timeline cards --- */
+.ftl-card ul,
+.ftl-card .items {
+  list-style: disc !important;
+  padding-left: 1.25rem;     /* indent bullets */
+  margin: 8px 0 0;
+}
+
+.ftl-card li {
+  list-style: disc !important;
+  margin: 6px 0;
+  line-height: 1.55;
+}

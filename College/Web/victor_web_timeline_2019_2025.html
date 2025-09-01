@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Victor – Footprint Timeline</title>
+  <style>
+    :root {
+      --bg: #0f172a;           /* slate-900 */
+      --panel: #0b1220;        /* deep panel */
+      --text: #e5e7eb;         /* gray-200 */
+      --muted: #94a3b8;        /* slate-400 */
+      --accent: #60a5fa;       /* blue-400 */
+      --accent-2: #22d3ee;     /* cyan-400 */
+      --rail: #1f2937;         /* gray-800 */
+      --dot: #38bdf8;          /* sky-400 */
+      --shadow: 0 10px 25px rgba(2,6,23,.35);
+      --radius: 18px;
+      --event-bg: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      --lesson-bg: linear-gradient(180deg, rgba(34,211,238,.16), rgba(34,211,238,.05));
+      --lesson-border: rgba(34,211,238,.55);
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, #1b2a49 0%, transparent 60%),
+                  radial-gradient(1400px 800px at 120% 10%, #0a3b46 0%, transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page { max-width: 1100px; margin: 48px auto 96px; padding: 0 20px; }
+
+    header h1 {
+      font-weight: 800; font-size: clamp(28px, 4vw, 42px); margin: 0 0 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    header p { color: var(--muted); margin: 0 0 28px; font-size: 15px; }
+
+    /* center timeline rail */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, transparent, var(--rail) 10%, var(--rail) 90%, transparent);
+      transform: translateX(-1px);
+    }
+
+    /* year row with two sides */
+    .year-block { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin: 42px 0 56px; }
+
+    .year-label { position: absolute; left: 50%; top: -16px; transform: translate(-50%, -100%); display: flex; align-items: center; gap: 10px; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #a5f3fc, var(--dot));
+      box-shadow: 0 0 0 4px rgba(56,189,248,.15), 0 6px 18px rgba(56,189,248,.35); }
+    .year-label h2 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: .5px; }
+
+    /* group cards */
+    .group { display: grid; gap: 14px; }
+    .card { border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(148,163,184,.16); backdrop-filter: blur(6px); }
+
+    .card.event { background: var(--event-bg); padding: 16px 18px; }
+    .card.event h3 { margin: 0 0 6px; font-size: 14px; letter-spacing: .3px; color: var(--accent); text-transform: uppercase; }
+
+    .items { margin: 0; padding: 0 0 0 18px; }
+    .items li { margin: 6px 0; line-height: 1.5; }
+
+    .card.lesson { background: var(--lesson-bg); border: 1px solid var(--lesson-border); padding: 14px 16px; color: #d7fbff; font-style: italic; }
+
+    /* alternate sides per year */
+    .year-block:nth-child(odd) .left { grid-column: 1 / 2; }
+    .year-block:nth-child(odd) .right{ grid-column: 2 / 3; }
+    .year-block:nth-child(even) .left{ grid-column: 2 / 3; }
+    .year-block:nth-child(even) .right{ grid-column: 1 / 2; }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .timeline::before { left: 24px; }
+      .year-label { left: 24px; transform: translate(0, -100%); }
+      .year-block { grid-template-columns: 1fr; padding-left: 44px; }
+      .left, .right { grid-column: 1 / -1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Victor – Footprint Timeline (2019–2025)</h1>
+      <p>Each year is grouped by <strong>Research</strong>, <strong>Leadership</strong>, and <strong>Interests</strong>. Related events are clustered, and every group ends with a distinct lesson card.</p>
+    </header>
+
+    <section class="timeline">
+
+      <!-- 2019 -->
+      <div class="year-block">
+        <div class="year-label"><span class="dot"></span><h2>2019</h2></div>
+        <div class="left group">
+          <div class="card event">
+            <h3>Interests</h3>
+            <ul class="items">
+              <li>Grandmother diagnosed with Parkinson’s → personal motivation to connect technology with care.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Personal challenges can ignite lifelong missions.</div>
+        </div>
+      </div>
+
+      <!-- 2020–2022 -->
+      <div class="year-block">
+        <div class="year-label"><span class="dot"></span><h2>2020–2022</h2></div>
+        <div class="left group">
+          <div class="card event">
+            <h3>Research / Technical Development</h3>
+            <ul class="items">
+              <li>Self‑taught programming; early builds (Arduino cars).</li>
+              <li>CTD Summer Program – SwiftUI apps.</li>
+              <li>USACO training → algorithmic thinking.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Curiosity + consistency compound into real capability.</div>
+        </div>
+        <div class="right group">
+          <div class="card event">
+            <h3>Interests</h3>
+            <ul class="items">
+              <li>Joined FTC Robotics → hands‑on engineering begins.</li>
+              <li>Orchestra/violin; steady practice in art & sports.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Breadth in arts & sport strengthens problem‑solving stamina.</div>
+        </div>
+      </div>
+
+      <!-- 2022 -->
+      <div class="year-block">
+        <div class="year-label"><span class="dot"></span><h2>2022</h2></div>
+        <div class="left group">
+          <div class="card event">
+            <h3>Research</h3>
+            <ul class="items">
+              <li>Prototyped an AI diagnostic tool for Parkinson’s.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Early prototypes convert ideas into momentum.</div>
+        </div>
+        <div class="right group">
+          <div class="card event">
+            <h3>Leadership & Interests</h3>
+            <ul class="items">
+              <li>Advanced to core contributor on the FTC software team.</li>
+              <li>Completed first full marathon.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Resilience under pressure turns ambition into results.</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="year-block">
+        <div class="year-label"><span class="dot"></span><h2>2023</h2></div>
+        <div class="left group">
+          <div class="card event">
+            <h3>Leadership</h3>
+            <ul class="items">
+              <li>FTC Software Lead; guided command‑system architecture.</li>
+              <li>PTO innovation adopted by teams globally.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Leadership = vision + the ability to motivate through setbacks.</div>
+        </div>
+        <div class="right group">
+          <div class="card event">
+            <h3>Research & Interests</h3>
+            <ul class="items">
+              <li>Refined Parkinson’s diagnostic algorithms via independent research.</li>
+              <li>Expanded endurance‑running discipline.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Deep work thrives with endurance routines.</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="year-block">
+        <div class="year-label"><span class="dot"></span><h2>2024</h2></div>
+        <div class="left group">
+          <div class="card event">
+            <h3>Research</h3>
+            <ul class="items">
+              <li>ISEF Finalist & JSHS Finalist (Parkinson’s rehabilitation glove).</li>
+              <li>Developed <strong>ParkinAid</strong>: AI‑powered early diagnostic tool.</li>
+              <li>Winner, Congressional App Challenge (Parkinson’s Diagnostic App).</li>
+              <li>Cal Poly internship: Sign‑Language Computer‑Vision translation.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Rigor + iteration turns prototypes into reliable tools.</div>
+        </div>
+        <div class="right group">
+          <div class="card event">
+            <h3>Leadership & Interests</h3>
+            <ul class="items">
+              <li>Founded <strong>ParkinAid NGO</strong> → outreach, awareness, diagnostics.</li>
+              <li>Co‑founded AI Club; grew to 50+ members with gamified learning.</li>
+              <li>Organized 18 benefit concerts; 100+ volunteering bridging STEM & arts.</li>
+              <li>Diamond Challenge competitor (entrepreneurship).</li>
+              <li>FTC Worlds Championship: 2nd Alliance Captain.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Innovation matters most when communities trust and adopt it.</div>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="year-block">
+        <div class="year-label"><span class="dot"></span><h2>2025</h2></div>
+        <div class="left group">
+          <div class="card event">
+            <h3>Research</h3>
+            <ul class="items">
+              <li>ISEF Finalist (2nd Place, Translational Medical Sciences) – ParkinAid Diagnostic.</li>
+              <li>Hmong community healthcare research → empathy integrated into AI design.</li>
+              <li>BWSI Medlytics summer program → advanced AI + healthcare training.</li>
+              <li>John Locke Institute Global Essay Prize (Theology): shortlisted (Top 18.65%).</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Cross‑disciplinary rigor (tech + culture + philosophy) amplifies impact.</div>
+        </div>
+        <div class="right group">
+          <div class="card event">
+            <h3>Leadership & Interests</h3>
+            <ul class="items">
+              <li>Expanded ParkinAid → 15+ countries (1,100+ users) & 2,000+ local outreach.</li>
+              <li>FTC Worlds Championship (return competitor).</li>
+              <li>AI newsletter launched – biweekly insights for 100+ readers.</li>
+            </ul>
+          </div>
+          <div class="card lesson">Lesson learned: Scaling requires systems—product, outreach, and storytelling working together.</div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</body>
+</html>
