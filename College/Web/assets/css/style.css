@@ -1653,11 +1653,25 @@ input:-webkit-autofill:active {
   }
 }
 .banner-content {
-  width: 478px;
+  width: 600px;
 }
+
+.banner-content .static-text {
+  font-weight: 700;
+  font-size: 60px;       /* make it bigger than display-one (80px) */
+  line-height: 120%;
+  color: rgba(var(--p1), 1);
+  display: block;
+}
+
 .banner-content .typing-text {
+  font-size: 45px;       /* smaller than the static line */
+  line-height: 120%;
+  font-weight: 600;
   color: rgba(var(--p1), 1);
 }
+
+
 .banner-content .typing-text::after {
   content: "|";
   animation: blink 1s step-end infinite;
@@ -1702,6 +1716,30 @@ input:-webkit-autofill:active {
 .banner-counter {
   width: 636px;
 }
+
+.scroll-reminder {
+  margin-left: 60px;
+  color: rgba(var(--p1), 1);   /* theme blue */
+  font-weight: 600;
+  cursor: default;
+  white-space: nowrap;
+  background: rgba(82, 113, 255, 0.15);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.scroll-reminder .arrow {
+  font-size: 20px;
+  line-height: 1;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+
 
 .service-card {
   background-color: rgba(var(--n2), 1);
@@ -2385,3 +2423,121 @@ input:-webkit-autofill:active {
     margin: 0 auto;
   }
 }/*# sourceMappingURL=style.css.map */
+
+/* ===== Timeline v2 ===== */
+.tl-grid{
+  /* Tune spacing here */
+  --row-h: 96px;             /* height per month row (more space) */
+  --rail-w: 160px;           /* center column width */
+  --rail-line: 2px;          /* center rail thickness */
+  display: grid;
+  grid-template-columns: 1fr var(--rail-w) 1fr;
+  grid-auto-rows: var(--row-h);
+  position: relative;
+}
+
+/* Center rail with continuous vertical line */
+.tl-rail{
+  list-style: none; margin: 0; padding: 0;
+  grid-column: 2; position: relative;
+  z-index: 1;
+}
+.tl-rail::before{
+  content:"";
+  position: absolute; left: 50%; top: 0; bottom: 0;
+  width: var(--rail-line);
+  background: rgba(var(--p1), 1);
+  transform: translateX(-50%);
+}
+.tl-rail li{
+  height: var(--row-h);
+  display: grid; align-content: center; justify-items: center;
+  position: relative;
+  font-size: 12px; font-weight: 600; color: rgba(var(--n5), .7);
+}
+.tl-rail li::after{
+  /* small tick every month, connected to the rail */
+  content:"";
+  position: absolute; left: 50%; bottom: 0;
+  width: 14px; height: 2px; background: rgba(var(--p1), 1);
+  transform: translateX(-50%);
+}
+
+/* Columns */
+.tl-col{ position: relative; z-index: 2;}
+.tl-item{
+  position: relative; z-index: 2;
+}
+.tl-item.left  { grid-column: 1; display:flex; justify-content:flex-end; align-items:center; }
+.tl-item.right { grid-column: 3; display:flex; justify-content:flex-start; align-items:center; }
+
+/* Cards */
+.tl-card{
+  display: inline-block;
+  z-index: 2;
+  max-width: 92%;
+  background: rgba(var(--n2),1);
+  border: 1px solid rgba(var(--n4), .08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--box-shadow-p2);
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+}
+.tl-card .tl-tag{ font-size: 12px; font-weight: 700; color: rgba(var(--p1), 1); }
+.tl-card .tl-title{ font-size: 18px; font-weight: 800; color: rgba(var(--n5),1); margin-top: 2px; }
+.tl-card .tl-text{ font-size: 14px; color: rgba(var(--n4),1); margin-top: 6px; }
+
+/* Connector from card to the rail (auto-sized to rail width) */
+.tl-card[data-side="left"]::after,
+.tl-card[data-side="right"]::after{
+  content:"";
+  position:absolute; top: 50%;
+  height: 2px; background: rgba(var(--p1), 1);
+  transform: translateY(-50%);
+}
+.tl-card[data-side="left"]::after{
+  right: calc(-1 * (var(--rail-w) / 2 - var(--rail-line)/2));
+  width: calc(var(--rail-w) / 2 - var(--rail-line)/2);
+}
+.tl-card[data-side="right"]::after{
+  left: calc(-1 * (var(--rail-w) / 2 - var(--rail-line)/2));
+  width: calc(var(--rail-w) / 2 - var(--rail-line)/2);
+}
+
+/* Chunk bands (grouping semesters/periods) */
+.tl-chunk{
+  grid-column: 1 / 4; position: relative;
+  background: linear-gradient(to bottom, rgba(var(--p1), .05), rgba(var(--p1), .05));
+  border-left: 2px solid rgba(var(--p1), .18);
+  border-right: 2px solid rgba(var(--p1), .18);
+  z-index: 0; pointer-events: none;
+}
+.tl-chunk-label{
+  position: sticky; top: 0; /* nice effect while scrolling */
+  margin: 6px 0 0 0; padding-left: 8px;
+  font-size: 12px; font-weight: 700; color: rgba(var(--p1), 1);
+}
+
+/* Interaction: pair highlighting */
+.tl-card[data-key]{
+  cursor: default;
+}
+.tl-card[data-key].is-active{
+  border-color: rgba(var(--p1), 1);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+.tl-dim .tl-card:not(.is-active){
+  opacity: .45;
+}
+
+/* Responsive */
+@media (max-width: 991px){
+  .tl-grid{ grid-template-columns: 1fr var(--rail-w); }
+  .tl-item.right{ grid-column: 1; }
+  .tl-card{ max-width: 100%; }
+  .tl-card[data-side="right"]::after{ display:none; }
+}
+
+
+.tl-col, .tl-item, .tl-card { z-index: 2; }        /* cards on top */

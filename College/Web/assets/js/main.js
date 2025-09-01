@@ -478,3 +478,211 @@ document.addEventListener("DOMContentLoaded", function () {
     once: true,
   });
 });
+
+/* ===== Timeline v2: fixed sides + chunks + hover link ===== */
+
+/* Config */
+const TL_START = new Date(2023, 6, 1); // Jul 2023
+const TL_END   = new Date(2025, 6, 1); // Jul 2025
+
+/* Months array */
+const months = [];
+{
+  const d = new Date(TL_START);
+  while (d <= TL_END) {
+    months.push({ y: d.getFullYear(), m: d.getMonth() + 1 });
+    d.setMonth(d.getMonth() + 1);
+  }
+}
+
+/* Helpers */
+function ymLabel(ym) {
+  const [Y,M] = ym.split("-").map(Number);
+  return new Date(Y, M-1, 1).toLocaleString(undefined, { month:"short", year:"numeric" });
+}
+function rowOf(ym) {
+  const [Y, M] = ym.split("-").map(Number);
+  return (Y - TL_START.getFullYear()) * 12 + (M - (TL_START.getMonth()+1)) + 1;
+}
+
+/* Build months rail */
+const rail = document.getElementById("tl-months");
+months.forEach(({y,m}) => {
+  const li = document.createElement("li");
+  li.textContent = new Date(y, m-1, 1).toLocaleString(undefined, { month:"short", year:"numeric" });
+  rail.appendChild(li);
+});
+
+/* Chunk bands (group periods for readability) */
+const chunks = [
+  { label: "Arrival & First Steps",  start:"2023-07", end:"2023-12" },
+  { label: "Building & Recognition", start:"2024-01", end:"2024-06" },
+  { label: "Teams & Community",      start:"2024-07", end:"2024-12" },
+  { label: "Research to Impact",     start:"2025-01", end:"2025-07" }
+];
+
+/* Data: each pair has a key; experience on the left, growth on the right */
+const pairs = [
+  {
+    key:"arrive",
+    date:"2023-07",
+    exp:{ title:"Landed in Chicago", text:"Moved from China; new school, new culture, new goals." },
+    growth:{ text:"Resilience & curiosity: adapt quickly to uncertainty." }
+  },
+  {
+    key:"start-research",
+    date:"2023-08",
+    exp:{ title:"Began Parkinson’s Research", text:"Family experience → survey literature; sketch rehab ideas." },
+    growth:{ text:"Math matters: signals, statistics, and ML foundations." }
+  },
+  {
+    key:"gloves-iter",
+    date:"2023-10",
+    exp:{ title:"3 Rehab Glove Prototypes", text:"Iterated materials, ergonomics, and electronics." },
+    growth:{ text:"Rapid prototyping + tooling: CAD, 3D printing, MCUs." }
+  },
+  {
+    key:"aux-device",
+    date:"2023-12",
+    exp:{ title:"Aux Rehab Device (Finger Tremor)", text:"Focused device for tremor/stiffness relief." },
+    growth:{ text:"Human-centered requirements from patient interviews." }
+  },
+  {
+    key:"isef-final",
+    date:"2024-01",
+    exp:{ title:"ISEF/JSHS Finalist", text:"National recognition of methodology & results." },
+    growth:{ text:"Rigor: reproducible experiments & error analysis." }
+  },
+  {
+    key:"parkinaid",
+    date:"2024-03",
+    exp:{ title:"Founded ParkinAid (NGO)", text:"Visits, webinars with clinicians, caregiver outreach." },
+    growth:{ text:"Build with, not for: empathy-in-the-loop." }
+  },
+  {
+    key:"ftc-worlds-24",
+    date:"2024-04",
+    exp:{ title:"FTC Robotics → Worlds (SW Lead)", text:"Strategy, CV & autonomous; integrated sensor pipelines." },
+    growth:{ text:"Team leadership: reviews, testing discipline, CI habits." }
+  },
+  {
+    key:"diamond",
+    date:"2024-04",
+    exp:{ title:"Diamond Challenge (Semifinalist)", text:"Validated social entrepreneurship plan for ParkinAid." },
+    growth:{ text:"Project → Product: value prop & stakeholders." }
+  },
+  {
+    key:"softcom",
+    date:"2024-06",
+    exp:{ title:"SoftCom Lab Intern (Cal Poly)", text:"SignLang; data curation + model evaluation loops." },
+    growth:{ text:"Tools mature: notebooks → versioned pipelines & benchmarks." }
+  },
+  {
+    key:"ai-club",
+    date:"2024-09",
+    exp:{ title:"AI Club Setup", text:"Led workshops; guided applied ML projects." },
+    growth:{ text:"Teaching clarifies thinking; communicate simply." }
+  },
+  {
+    key:"congress-app",
+    date:"2024-11",
+    exp:{ title:"Congressional App Challenge — 1st (WI-5)", text:"ParkinAid diagnosis app; mobile deployment." },
+    growth:{ text:"Full-stack lens: latency, UX, privacy for real users." }
+  },
+  {
+    key:"paper",
+    date:"2025-01",
+    exp:{ title:"Paper: ParkinAid Multimodal Diagnosis", text:"Motor + speech ML/CV methods with clear baselines." },
+    growth:{ text:"Write like a scientist: ablations, claims, limitations." }
+  },
+  {
+    key:"patent",
+    date:"2025-02",
+    exp:{ title:"U.S. Provisional Patent 63/790,055", text:"Filed diagnostic & rehab innovations." },
+    growth:{ text:"IP literacy: novelty search, claims, prior art." }
+  },
+  {
+    key:"ftc-worlds-25",
+    date:"2025-04",
+    exp:{ title:"FTC Robotics → Worlds (again)", text:"Reliability, auto, and mentoring underclassmen." },
+    growth:{ text:"Scale impact: docs, handoff, and repeatability." }
+  },
+  {
+    key:"isef-2nd",
+    date:"2025-05",
+    exp:{ title:"ISEF — 2nd (Translational Medical Science)", text:"Multimodal AI + robot-assisted rehab recognized." },
+    growth:{ text:"Translational focus: clinical relevance over leaderboard." }
+  },
+  {
+    key:"bwsI",
+    date:"2025-07",
+    exp:{ title:"MIT BWSI — Medlytics", text:"Immersed in medical data science with peers & mentors." },
+    growth:{ text:"Responsible deployment: generalize, validate ethically." }
+  }
+];
+
+/* Mount points */
+const leftCol  = document.getElementById("tl-left");
+const rightCol = document.getElementById("tl-right");
+
+/* Render chunk bands */
+function addChunk({label,start,end}){
+  const band = document.createElement("div");
+  band.className = "tl-chunk";
+  band.style.gridRow = `${rowOf(start)} / ${rowOf(end) + 1}`;
+  const tag = document.createElement("div");
+  tag.className = "tl-chunk-label";
+  tag.textContent = label;
+  band.appendChild(tag);
+  // Insert before other content so it sits behind
+  leftCol.parentElement.insertBefore(band, leftCol);
+}
+chunks.forEach(addChunk);
+
+/* Create a card */
+function makeCard({date, title, text, key, side}){
+  const wrap = document.createElement("div");
+  wrap.className = `tl-item ${side}`;
+  wrap.style.gridRow = rowOf(date);
+
+  const card = document.createElement("div");
+  card.className = "tl-card";
+  card.dataset.side = side;
+  if (key) card.dataset.key = key;
+  card.innerHTML = `
+    <div class="tl-tag">${ymLabel(date)}</div>
+    <div class="tl-title">${title}</div>
+    <div class="tl-text">${text}</div>
+  `;
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* Render (experience always left, growth always right) */
+pairs.forEach(p => {
+  const expNode  = makeCard({date:p.date, title:p.exp.title, text:p.exp.text, key:p.key, side:"left"});
+  const growNode = makeCard({date:p.date, title:"Growth", text:p.growth.text, key:p.key, side:"right"});
+  leftCol.appendChild(expNode);
+  rightCol.appendChild(growNode);
+});
+
+/* Hover linking: highlight both cards sharing the same data-key */
+function setupHoverLink(){
+  const root = document.querySelector("#journey .tl-grid");
+  const cards = root.querySelectorAll(".tl-card[data-key]");
+  const byKey = {};
+  cards.forEach(c => (byKey[c.dataset.key] ??= []).push(c));
+
+  cards.forEach(c => {
+    c.addEventListener("mouseenter", () => {
+      root.classList.add("tl-dim");
+      byKey[c.dataset.key].forEach(x => x.classList.add("is-active"));
+    });
+    c.addEventListener("mouseleave", () => {
+      root.classList.remove("tl-dim");
+      byKey[c.dataset.key].forEach(x => x.classList.remove("is-active"));
+    });
+  });
+}
+setupHoverLink();
+

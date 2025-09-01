@@ -17,7 +17,7 @@ function playAnim() {
           // If text typed completely, wait 2s before starting to remove it.
           setTimeout(function () {
             playAnim();
-          }, 2000);
+          }, 1000);
           return;
         } else {
           // Continue to typing text by increasing index
@@ -47,7 +47,7 @@ function playAnim() {
   If removing text, call it every 60ms
   Type slower, remove faster
 */
-    isAdding ? 200 : 100
+    isAdding ? 100 : 50
   );
 }
 
