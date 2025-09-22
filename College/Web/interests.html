@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- required meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- #keywords -->
+    <meta name="keywords" content="boot, Bootstrap, Protfolily HTML Template" />
+    <!-- #description -->
+    <meta
+      name="description"
+      content="Protfolily - Responsive Personal Portfolio & Resume HTML Template"
+    />
+    <!-- swiper  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!-- #title -->
+    <title>Portfolify - Personal Portfolio & Resume HTML Template</title>
+    <!-- #favicon -->
+    <link
+      rel="shortcut icon"
+      href="assets/images/logo.png"
+      type="image/x-icon"
+    />
+    <!-- ==== css dependencies start ==== -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      /* --- Interest grid & cards --- */
+      .interest-filters {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .interest-chip {
+        padding: 0.5rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid var(--br-n4, rgba(0, 0, 0, 0.12));
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.95rem;
+        background: rgba(var(--n2, 255, 255, 255), 1);
+        transition: background 0.18s, color 0.18s, border-color 0.18s;
+      }
+      .interest-chip.active {
+        background: rgba(var(--p1, 82, 113, 255), 0.12);
+        color: rgba(var(--p1, 82, 113, 255), 1);
+        border-color: rgba(var(--p1, 82, 113, 255), 0.3);
+      }
+
+      .interest-card {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        height: 100%;
+        background: rgba(var(--n2, 255, 255, 255), 1);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+      .interest-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      }
+
+      .interest-img img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 3 / 2; /* bigger feel */
+      }
+
+      /* Overlay that fades/animates in on hover */
+      .interest-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 1.25rem;
+        text-align: center;
+        background: rgba(0, 0, 0, 0);
+        opacity: 0;
+        transition: opacity 0.25s ease, background 0.25s ease;
+      }
+      .interest-card:hover .interest-overlay {
+        background: rgba(0, 0, 0, 0.45);
+        opacity: 1;
+      }
+      .interest-overlay .overlay-content {
+        transform: translateY(8px);
+        transition: transform 0.25s ease 0.03s;
+        color: #fff;
+      }
+      .interest-card:hover .overlay-content {
+        transform: translateY(0);
+      }
+
+      /* Title under each card */
+      .interest-title {
+        font-weight: 700;
+        font-size: 1.15rem;
+        margin-top: 0.6rem;
+        text-align: center;
+      }
+
+      /* Two big cards per row on desktop; 1 per row on mobile */
+      /* Grid layout: 1 per row on mobile, 2 per row ≥768px */
+      .interest-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 50px; /* spacing between rows */
+        column-gap: 24px; /* spacing between columns */
+      }
+      @media (min-width: 768px) {
+        .interest-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      /* column wrapper no longer needs width rules */
+      .interest-col {
+        width: 100%;
+      }
+
+      /* Hide when filtered */
+      .hidden {
+        display: none !important;
+      }
+    </style>
+    <!-- AOS  -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- ICON  -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <!-- don't remove this  -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="11"
+      height="15"
+      viewBox="0 0 11 15"
+      fill="none"
+      class="d-none"
+    >
+      <g clip-path="url(#clip0_3569_434)">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5.69145 8.43063L1.72801 5.49387L5.69145 2.54023V0L0 4.21303V6.75919L5.69145 10.9887V8.43063Z"
+          fill="rgba(var(--p1))"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M1.72801 5.49387L5.69145 2.54023V0L0 4.21303V6.75919L1.72801 5.49387Z"
+          fill="rgba(var(--p1))"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M4.86328 6.5702L8.82672 9.5065L4.86328 12.4606V15.0004L10.5552 10.7864V8.24163L4.86328 4.01172V6.5702Z"
+          fill="rgba(var(--p1))"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M4.86328 6.5702L8.82672 9.5065L10.5552 10.7864V8.24163L4.86328 4.01172V6.5702Z"
+          fill="rgba(var(--p1))"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M8.72466 2.00391C9.52091 2.00391 10.1657 2.64912 10.1657 3.44491C10.1657 4.24115 9.52091 4.88591 8.72466 4.88591C7.92841 4.88591 7.2832 4.2407 7.2832 3.44491C7.2832 2.64912 7.92841 2.00391 8.72466 2.00391Z"
+          fill="rgba(var(--p1))"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M1.83013 12.9972C1.03388 12.9972 0.388672 12.352 0.388672 11.5562C0.388672 10.7604 1.03388 10.1152 1.82967 10.1152C2.62546 10.1152 3.27067 10.76 3.27067 11.5562C3.27067 12.3525 2.62592 12.9972 1.82967 12.9972H1.83013Z"
+          fill="rgba(var(--p1))"
+        />
+      </g>
+      <defs>
+        <clipPath>
+          <rect width="10.5561" height="15" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+    <!-- preloder  srart -->
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+    <!-- preloder  end -->
+
+    <div class="d-flex gap-6">
+      <!-- sidebar start -->
+      <div class="side-menu">
+        <!-- sidebar-btn  -->
+        <div class="sidebar-btn close-btn cursor-pointer d-block d-lg-none">
+          <i class="ph ph-x fs-two p1-color"></i>
+        </div>
+
+        <div class="d-flex">
+          <div class="side-menu-left">
+            <div>
+              <div
+                class="d-flex flex-column gap-8 justify-content-center align-items-center mt-6"
+              >
+                <a href="index.html" class="side-icon bgn2-color brn4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="15"
+                    viewBox="0 0 11 15"
+                    fill="none"
+                  >
+                    <g clip-path="url(#clip0_3569_434)">
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5.69145 8.43063L1.72801 5.49387L5.69145 2.54023V0L0 4.21303V6.75919L5.69145 10.9887V8.43063Z"
+                        fill="rgba(var(--p1))"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M1.72801 5.49387L5.69145 2.54023V0L0 4.21303V6.75919L1.72801 5.49387Z"
+                        fill="rgba(var(--p1))"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M4.86328 6.5702L8.82672 9.5065L4.86328 12.4606V15.0004L10.5552 10.7864V8.24163L4.86328 4.01172V6.5702Z"
+                        fill="rgba(var(--p1))"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M4.86328 6.5702L8.82672 9.5065L10.5552 10.7864V8.24163L4.86328 4.01172V6.5702Z"
+                        fill="rgba(var(--p1))"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M8.72466 2.00391C9.52091 2.00391 10.1657 2.64912 10.1657 3.44491C10.1657 4.24115 9.52091 4.88591 8.72466 4.88591C7.92841 4.88591 7.2832 4.2407 7.2832 3.44491C7.2832 2.64912 7.92841 2.00391 8.72466 2.00391Z"
+                        fill="rgba(var(--p1))"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M1.83013 12.9972C1.03388 12.9972 0.388672 12.352 0.388672 11.5562C0.388672 10.7604 1.03388 10.1152 1.82967 10.1152C2.62546 10.1152 3.27067 10.76 3.27067 11.5562C3.27067 12.3525 2.62592 12.9972 1.82967 12.9972H1.83013Z"
+                        fill="rgba(var(--p1))"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath>
+                        <rect width="10.5561" height="15" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </a>
+                <a href="checkout.html" class="position-relative">
+                  <div class="side-icon bg1-color">
+                    <i class="ph ph-shopping-cart n11-color"></i>
+                  </div>
+                  <div class="cart-counter">
+                    <span class="n1-color">02</span>
+                  </div>
+                </a>
+                <div class="d-flex flex-column align-items-center gap-1">
+                  <span class="toggle_name fs-eleven n5-color">DarkMode</span>
+                  <button class="side-icon bg1-color mood_toggle">
+                    <i class="mood_icon ph-fill ph-moon fs-six n11-color"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="side-menu-right overflow-y-auto">
+            <div
+              class="d-flex flex-column gap-6 justify-content-between py-10 px-5 bgn2-color h-100"
+            >
+              <div class="">
+                <div class="sidebar-profile">
+                  <div class="position-relative">
+                    <div
+                      class="profile-img1 d-flex justify-content-center overflow-hidden"
+                    >
+                      <img
+                        src="./assets/images/profile.png"
+                        alt="user"
+                        class=""
+                      />
+                    </div>
+                    <span class="thumb">👋</span>
+                  </div>
+
+                  <h4 class="n5-color fw-semibold fs-five mt-2 text-center">
+                    Victor Han
+                  </h4>
+                  <span class="n5-color fs-nine d-block text-center"
+                    >Junior @Brookfield Central High School</span
+                  >
+                  <div
+                    class="d-flex justify-content-center gap-2 align-items-center mt-4"
+                  >
+                    <a href="javascript:void(0)" class="social-icon p1-color">
+                      <i class="ph ph-facebook-logo"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="social-icon p1-color">
+                      <i class="ph ph-instagram-logo"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="social-icon p1-color">
+                      <i class="ph ph-x-logo"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="social-icon p1-color">
+                      <i class="ph ph-ddin-logo"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="line-divider my-4 my-md-8"></div>
+
+                <div class="menu-list">
+                  <ul class="d-flex flex-column gap-3">
+                    <li class="rounded-3">
+                      <a
+                        href="index.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-user fs-six"></i> About Me</a
+                      >
+                    </li>
+
+                    <li class="rounded-3">
+                      <a
+                        href="portfolio.html"
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div
+                          class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        >
+                          <i class="ph ph-code-block fs-six"></i> Portfolio
+                        </div>
+                        <span
+                          class="n5-color bg2-color fs-ten px-1 pt-1 rounded-2 me-3"
+                          >16</span
+                        >
+                      </a>
+                    </li>
+                    <li class="rounded-3">
+                      <a
+                        href="price.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-briefcase fs-six"></i>Services &
+                        Pricing</a
+                      >
+                    </li>
+                    <li class="rounded-3">
+                      <a
+                        href="resume.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-notebook fs-six"></i> Resume</a
+                      >
+                    </li>
+                    <li class="rounded-3">
+                      <a
+                        href="products.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-shopping-bag fs-six"></i>Products</a
+                      >
+                    </li>
+                    <li class="rounded-3 bg1-color">
+                      <a
+                        href="blog.html"
+                        class="d-flex align-items-center gap-2 n11-color fs-eight px-3 py-2"
+                        ><i class="ph ph-newspaper-clipping fs-six"></i>Blog</a
+                      >
+                    </li>
+                    <li class="rounded-3">
+                      <a
+                        href="contact.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-envelope fs-six"></i>Contact</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a
+                href="contact.html"
+                class="primary-btn bg1-color fw-medium n11-color px-3 px-md-6 py-2 py-md-4 rounded-pill d-flex align-items-center gap-2 mx-auto"
+              >
+                <i class="ph ph-paper-plane-tilt"></i>Hire Me
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar end -->
+
+      <!-- main content -->
+      <div class="main-content w-100">
+        <!-- top header  -->
+        <div
+          class="w-100 bgn1-color p-3 position-fixed z-3 top-0 d-lg-none d-flex align-items-center justify-content-between br-bottom-n5 box-shadow1"
+        >
+          <a href="index.html" class="side-icon bgn2-color brn4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="11"
+              height="15"
+              viewBox="0 0 11 15"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_3569_434)">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.69145 8.43063L1.72801 5.49387L5.69145 2.54023V0L0 4.21303V6.75919L5.69145 10.9887V8.43063Z"
+                  fill="rgba(var(--p1))"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M1.72801 5.49387L5.69145 2.54023V0L0 4.21303V6.75919L1.72801 5.49387Z"
+                  fill="rgba(var(--p1))"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M4.86328 6.5702L8.82672 9.5065L4.86328 12.4606V15.0004L10.5552 10.7864V8.24163L4.86328 4.01172V6.5702Z"
+                  fill="rgba(var(--p1))"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M4.86328 6.5702L8.82672 9.5065L10.5552 10.7864V8.24163L4.86328 4.01172V6.5702Z"
+                  fill="rgba(var(--p1))"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M8.72466 2.00391C9.52091 2.00391 10.1657 2.64912 10.1657 3.44491C10.1657 4.24115 9.52091 4.88591 8.72466 4.88591C7.92841 4.88591 7.2832 4.2407 7.2832 3.44491C7.2832 2.64912 7.92841 2.00391 8.72466 2.00391Z"
+                  fill="rgba(var(--p1))"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M1.83013 12.9972C1.03388 12.9972 0.388672 12.352 0.388672 11.5562C0.388672 10.7604 1.03388 10.1152 1.82967 10.1152C2.62546 10.1152 3.27067 10.76 3.27067 11.5562C3.27067 12.3525 2.62592 12.9972 1.82967 12.9972H1.83013Z"
+                  fill="rgba(var(--p1))"
+                />
+              </g>
+              <defs>
+                <clipPath>
+                  <rect width="10.5561" height="15" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+
+          <div class="d-flex gap-3 align-items-center">
+            <a href="checkout.html" class="position-relative">
+              <div class="side-icon bg1-color">
+                <i class="ph ph-shopping-cart n11-color"></i>
+              </div>
+              <div class="cart-counter-header">
+                <span class="n1-color">02</span>
+              </div>
+            </a>
+            <button class="side-icon bg1-color mood_toggle">
+              <i class="mood_icon ph-fill ph-moon fs-six n11-color"></i>
+            </button>
+          </div>
+        </div>
+        <!-- bottom header  -->
+        <div
+          class="w-100 bgn1-color p-3 position-fixed z-3 bottom-0 d-block d-lg-none br-top-n5 box-shadow1"
+        >
+          <div class="header-bottom-menu w-full">
+            <ul class="d-flex gap-1 align-items-center justify-content-between">
+              <li>
+                <a
+                  href="index.html"
+                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
+                >
+                  <span
+                    class="fs-five d-flex align-items-center justify-content-center"
+                  >
+                    <i class="ph-fill ph-user"></i>
+                  </span>
+                  <span class="d-none d-md-block">About Me</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="portfolio.html"
+                  class="d-flex justify-content-between align-items-center"
+                >
+                  <div
+                    class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
+                  >
+                    <span
+                      class="fs-five d-flex align-items-center justify-content-center"
+                    >
+                      <i class="ph-fill ph-code-block"></i>
+                    </span>
+                    <span class="d-none d-md-block">Portfolio</span>
+                  </div>
+                  <span
+                    class="n5-color bg2-color fs-ten px-1 pt-1 rounded-2 me-3 d-none d-md-block"
+                    >16</span
+                  >
+                </a>
+              </li>
+              <li>
+                <a
+                  href="price.html"
+                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
+                >
+                  <span
+                    class="fs-five d-flex align-items-center justify-content-center"
+                  >
+                    <i class="ph-fill ph-briefcase"></i>
+                  </span>
+                  <span class="d-none d-md-block">Pricing</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="resume.html"
+                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
+                >
+                  <span
+                    class="fs-five d-flex align-items-center justify-content-center"
+                    ><i class="ph-fill ph-notebook fs-six"></i
+                  ></span>
+                  <span class="d-none d-md-block">Resume</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="products.html"
+                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
+                >
+                  <span
+                    class="fs-five d-flex align-items-center justify-content-center"
+                  >
+                    <i class="ph-fill ph-shopping-bag"></i>
+                  </span>
+                  <span class="d-none d-md-block">Products</span>
+                </a>
+              </li>
+              <li class="rounded-3 bg1-color">
+                <a
+                  href="blog.html"
+                  class="d-flex align-items-center gap-2 n11-color fs-eight p-2"
+                >
+                  <span
+                    class="fs-five d-flex align-items-center justify-content-center"
+                  >
+                    <i class="ph-fill ph-newspaper-clipping"></i>
+                  </span>
+                  <span class="d-none d-md-block">Blog</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
+                >
+                  <span
+                    class="fs-five d-flex align-items-center justify-content-center"
+                    ><i class="ph-fill ph-envelope"></i
+                  ></span>
+                  <span class="d-none d-md-block">Contact</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- color palettes btns -->
+        <div class="color-switcher">
+          <button class="switcher-btn">
+            <i class="ph ph-gear-six"></i>
+          </button>
+          <div class="pallates box-shadow2 brn4">
+            <div class="d-flex gap-2">
+              <button
+                class="color-btn bg-color1"
+                data-color="120, 171, 168"
+              ></button>
+              <button
+                class="color-btn bg-color2"
+                data-color="255, 145, 251"
+              ></button>
+              <button
+                class="color-btn bg-color3"
+                data-color="253, 187, 46"
+              ></button>
+            </div>
+            <div class="d-flex gap-2 mt-2">
+              <button
+                class="color-btn bg-color4"
+                data-color=" 82, 113, 255"
+              ></button>
+              <button
+                class="color-btn bg-color5"
+                data-color=" 0, 255, 255"
+              ></button>
+              <button
+                class="color-btn bg-color6"
+                data-color="84, 182, 137"
+              ></button>
+            </div>
+          </div>
+        </div>
+
+        <section class="pt-120 pb-120 mt-10 mt-lg-0">
+          <div class="pb-60 br-bottom-n3">
+            <div class="container">
+              <div data-aos="zoom-in" class="page-heading">
+                <h3
+                  class="page-title fs-one fw-semibold n5-color mb-2 mb-md-3 text-center"
+                >
+                  Interests
+                </h3>
+                <p class="fs-seven n5-color mb-4 mb-md-8 text-center">
+                  Here's a few things I enjoy in my life!
+                </p>
+
+                <!-- Filter chips -->
+                <div class="interest-filters">
+                  <button class="interest-chip active" data-filter="all">
+                    All
+                  </button>
+                  <button class="interest-chip" data-filter="Sports">
+                    Sports
+                  </button>
+                  <button class="interest-chip" data-filter="Arts">Arts</button>
+                  <button class="interest-chip" data-filter="Community">
+                    Community
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interests grid (static cards) -->
+          <div class="container mt-6">
+            <div class="interest-grid">
+              <!-- Card -->
+              <div class="interest-col" data-category="Sports">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_soccer.png"
+                      alt="Playing soccer on a field"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">Soccer</h5>
+                      <p class="fs-eight">
+                        Wing/CM. Weekend league + conditioning; I track drills
+                        and match stats to improve pace and decision-making.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">Soccer</div>
+              </div>
+
+              <div class="interest-col" data-category="Sports">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_running.jpg"
+                      alt="Trail running"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">Running</h5>
+                      <p class="fs-eight">
+                        5Ks and tempo runs; I love testing aerobic capacity and
+                        seeing steady gains on the same routes.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">Running</div>
+              </div>
+
+              <div class="interest-col" data-category="Sports">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_pool.jpg"
+                      alt="Trail running"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">pool</h5>
+                      <p class="fs-eight">I love playing pool</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">pool</div>
+              </div>
+
+              <div class="interest-col" data-category="Arts">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_violin.jpeg"
+                      alt="Piano keyboard"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">Violin</h5>
+                      <p class="fs-eight">
+                        Classical + lo-fi arrangements; practicing
+                        sight-readining and chord voicings to compose short
+                        themes.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">Violin</div>
+              </div>
+
+              <div class="interest-col" data-category="Arts">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_drawing.JPG"
+                      alt="Piano keyboard"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">Drawing</h5>
+                      <p class="fs-eight">I love drawing</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">Drawing</div>
+              </div>
+
+              <div class="interest-col" data-category="Arts">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_drone.JPG"
+                      alt="Piano keyboard"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">Drone Photography</h5>
+                      <p class="fs-eight">I love drone photographing</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">Drone Photography</div>
+              </div>
+
+              <div class="interest-col" data-category="Community">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_volunteering.jpg"
+                      alt="Volunteering event"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">
+                        Community Volunteering
+                      </h5>
+                      <p class="fs-eight">
+                        I love volunteering
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">
+                  Community Volunteering
+                </div>
+              </div>
+
+              <div class="interest-col" data-category="Community">
+                <div class="interest-card">
+                  <div class="interest-img">
+                    <img
+                      src="./assets/images/interests_research.png"
+                      alt="Volunteering event"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="interest-overlay">
+                    <div class="overlay-content">
+                      <h5 class="fs-six fw-semibold mb-2">
+                        Research
+                      </h5>
+                      <p class="fs-eight">
+                        I love presenting research.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="interest-title n5-color">
+                  Research
+                </div>
+              </div>
+
+              <!-- Add more cards later; just set data-category to Sports/Arts/Community/etc. -->
+            </div>
+          </div>
+        </section>
+
+        <!-- footer section start -->
+        <section
+          class="container d-flex flex-wrap gap-3 gap-md-6 justify-content-center justify-content-sm-between align-items-center pb-4 pb-md-8 text-center mb-16 mb-lg-0"
+        >
+          <span class="fs-eight fw-medium n5-color order-sm-2"
+            >Designed by
+            <a
+              href="https://themeforest.net/user/uiaxis"
+              class="fs-eight fw-medium n5-color"
+              >Victor Han</a
+            ></span
+          >
+          <span class="fs-eight fw-medium n5-color order-sm-1"
+            >Copyright © 2024
+            <a href="index.html" class="fs-eight fw-medium n5-color"
+              >Victor Han</a
+            >. All Rights Reserved.</span
+          >
+        </section>
+        <!-- footer section end -->
+      </div>
+    </div>
+
+    <!-- script js  -->
+    <script src="./assets/js/plugins/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script>
+      // Filter logic
+      const chips = document.querySelectorAll(".interest-chip");
+      const items = document.querySelectorAll(".interest-col");
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          chips.forEach((c) => c.classList.remove("active"));
+          chip.classList.add("active");
+
+          const filter = chip.dataset.filter;
+          items.forEach((card) => {
+            const cat = card.dataset.category;
+            card.classList.toggle("hidden", filter !== "all" && cat !== filter);
+          });
+        });
+      });
+    </script>
+    <!-- swiper js  -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- aos -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  </body>
+</html>
