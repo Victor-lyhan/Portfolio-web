@@ -221,6 +221,79 @@
           padding-left: 14px; /* match mobile rows */
         }
       }
+
+      /* Place the scroll box on the right, keep bullets tighter */
+      .pd-highlights.with-cta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 140px; /* bullets | mini box */
+        gap: 8px 16px;
+        align-items: start;
+      }
+
+      .pd-highlights.with-cta .pd-bullets {
+        padding-left: 16px; /* a bit tighter */
+        line-height: 1.4; /* squeeze lines */
+      }
+      .pd-highlights.with-cta .pd-bullets li {
+        margin: 2px 0; /* squeeze vertical gaps */
+      }
+
+      /* Compact scroll box */
+      .pd-scroll-cta {
+        width: 140px; /* fixed so it never overflows */
+        justify-self: end; /* hug the right edge */
+      }
+
+      .scroll-reminder--mini {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 8px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 10px;
+        font-size: 12px;
+        line-height: 1.2;
+        user-select: none;
+
+        background: rgba(var(--p1), 0.08); /* soft blue background */
+        color: rgba(var(--p1), 1); /* main blue text */
+        font-weight: 700;
+        box-shadow: 0 2px 8px rgba(82, 113, 255, 0.08);
+        text-align: center;
+      }
+      .scroll-reminder--mini span {
+        font-weight: 600;
+      }
+      .arrow--mini {
+        font-size: 16px;
+        line-height: 1;
+        animation: arrow-bounce 1.4s infinite;
+        transform-origin: center;
+      }
+
+      @keyframes arrow-bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(3px);
+        }
+      }
+
+      /* Mobile: stack box under bullets and center it */
+      @media (max-width: 768px) {
+        .pd-highlights.with-cta {
+          grid-template-columns: 1fr;
+        }
+        .pd-scroll-cta {
+          width: 160px; /* a touch wider on mobile */
+          justify-self: start; /* align left to match text */
+          margin-top: 6px;
+        }
+      }
     </style>
 
     <!-- AOS  -->
@@ -454,7 +527,7 @@
                         href="interests.html"
                         class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
                         ><i class="ph ph-newspaper-clipping fs-six"></i
-                        >Interests</a
+                        >Athletics,Arts,Community</a
                       >
                     </li>
                   </ul>
@@ -723,9 +796,12 @@
                   </div>
                   <div class="pd-highlights">
                     <ul class="pd-bullets n4-color">
-                      <li>Prototype v2 tested with 5 users</li>
+                      <li>
+                        3 prototypes; tested with 10 users, motion-detection
+                        accuracy ~95%
+                      </li>
                       <li>3D-printed frame; modular actuators</li>
-                      <li>Basic mobile telemetry dashboard</li>
+                      <li>BMobile telemetry/dashboard for home use</li>
                     </ul>
                   </div>
                 </div>
@@ -744,9 +820,18 @@
                   </div>
                   <div class="pd-highlights">
                     <ul class="pd-bullets n4-color">
-                      <li>2 papers drafted (preprint)</li>
-                      <li>~1,200 samples across 3 modalities</li>
-                      <li>Baseline CV + audio pipeline</li>
+                      <li>
+                        ~2,000+ samples across 3 modalities (hand, gait, voice);
+                        model accuracy ~90%
+                      </li>
+                      <li>
+                        ACM ICPS paper accepted; ISEF Second Award (May 2025);
+                        U.S. provisional patent
+                      </li>
+                      <li>
+                        Baseline CV + audio pipeline; app engaged 1,100+ users
+                        in 15 countries
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -765,9 +850,14 @@
                   </div>
                   <div class="pd-highlights">
                     <ul class="pd-bullets n4-color">
-                      <li>~2,000 people reached</li>
-                      <li>6 partner orgs; 3 webinars</li>
-                      <li>Volunteer team of 8</li>
+                      <li>~2,000+ people reached via outreach</li>
+                      <li>
+                        18 Parkinson’s benefit concerts → 1,000+ attendees,
+                        raised ~$5,600
+                      </li>
+                      <li>
+                        6 partner orgs; 3 expert webinars; volunteer team of 8
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -785,12 +875,24 @@
                       tools.
                     </p>
                   </div>
-                  <div class="pd-highlights">
+
+                  <!-- add the with-cta class + the cta block -->
+                  <div class="pd-highlights with-cta">
                     <ul class="pd-bullets n4-color">
-                      <li>48 survey responses; 12 interviews</li>
+                      <li>
+                        25 interviews · 2 focus groups (n=12) · 40 Hmong/EN app
+                        tests
+                      </li>
                       <li>Bilingual instrument pilot</li>
                       <li>1 poster; 1 patent application</li>
                     </ul>
+
+                    <div class="pd-scroll-cta">
+                      <div class="scroll-reminder--mini">
+                        <span>Scroll for more</span>
+                        <div class="arrow--mini">↓↓↓</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -938,8 +1040,7 @@
                       class="col-xl-6"
                     >
                       <div class="project-card">
-                        <!-- Add link -->
-                        <a class="thumb d-block">
+                        <a href="pd_parkinAid.html" class="thumb d-block">
                           <div class="post-thumb">
                             <div class="post-thumb-inner">
                               <img
@@ -966,29 +1067,27 @@
                           <div>
                             <div class="d-flex gap-2 align-items-center">
                               <a
-                                href="javascript:void(0)"
                                 class="n5-color fs-nine px-2 px-md-4 py-1 py-md-2 brn3 rounded-pill fw-medium"
                                 >Empathy</a
                               >
                               <a
-                                href="javascript:void(0)"
                                 class="n5-color fs-nine px-2 px-md-4 py-1 py-md-2 brn3 rounded-pill fw-medium"
                                 >Community Outreach</a
                               >
                               <a
-                                href="javascript:void(0)"
                                 class="n5-color fs-nine px-2 px-md-4 py-1 py-md-2 brn3 rounded-pill fw-medium"
                                 >Management</a
                               >
                             </div>
-                            <!-- Add link -->
                             <a
+                              href="pd_parkinAid.html"
                               class="project-title fs-five fw-semibold n5-color mt-3 mt-md-5 d-block"
                             >
                               NGO - ParkinAid
                             </a>
                           </div>
                           <a
+                            href="pd_parkinAid.html"
                             class="project-link d-flex align-items-center justify-content-center flex-shrink-0"
                           >
                             <i class="ph-bold ph-arrow-up-right n5-color"></i>
@@ -1003,7 +1102,7 @@
                       class="col-xl-6"
                     >
                       <div class="project-card">
-                        <a class="thumb d-block">
+                        <a href="pd_hmong.html" class="thumb d-block">
                           <div class="post-thumb">
                             <div class="post-thumb-inner">
                               <img
@@ -1046,12 +1145,14 @@
                               >
                             </div>
                             <a
+                              href="pd_hmong.html"
                               class="project-title fs-five fw-semibold n5-color mt-3 mt-md-5 d-block"
                             >
                               Hmong Race Social Research
                             </a>
                           </div>
                           <a
+                            href="pd_hmong.html"
                             class="project-link d-flex align-items-center justify-content-center flex-shrink-0"
                           >
                             <i class="ph-bold ph-arrow-up-right n5-color"></i>
@@ -1059,6 +1160,7 @@
                         </div>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
               </div>

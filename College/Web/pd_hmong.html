@@ -22,6 +22,113 @@
     />
     <!-- ==== css dependencies start ==== -->
     <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      /* two-column split inside the main (right) content area */
+      .pdg-split {
+        display: grid;
+        grid-template-columns: 1fr; /* single column on mobile */
+        gap: 24px;
+        align-items: start;
+      }
+      @media (min-width: 1200px) {
+        .pdg-split {
+          grid-template-columns: 1fr 420px; /* text | video on desktop */
+        }
+      }
+
+      /* sticky video on desktop so it stays visible while scrolling */
+      .pdg-video-aside {
+        position: sticky;
+        top: 24px;
+      }
+
+      /* Executive Summary card */
+      .exec-card {
+        background: rgba(var(--p1), 0.08);
+        border: 1px solid rgba(var(--p1), 0.22);
+        border-radius: 14px;
+        padding: 18px;
+      }
+      .exec-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .exec-badge {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: rgba(var(--p1), 1);
+        background: rgba(var(--p1), 0.14);
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+      .exec-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1.3fr 1fr; /* text | metrics */
+      }
+      @media (max-width: 992px) {
+        .exec-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* bullets + tiny table */
+      .exec-bullets {
+        margin: 0;
+        padding-left: 18px;
+        line-height: 1.55;
+      }
+      .exec-bullets li {
+        margin: 12px 0;
+      }
+      .exec-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+      }
+      .exec-table th,
+      .exec-table td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .exec-table th {
+        background: rgba(var(--p1), 0.08);
+        font-weight: 700;
+      }
+      .exec-foot {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .exec-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+        color: rgba(var(--p1), 1);
+        text-decoration: none;
+      }
+      /* 2️⃣ explanatory note under table */
+      .exec-note {
+        font-size: 0.9rem;
+        color: var(--n4-color, rgba(0, 0, 0, 0.6));
+        margin-top: 16px;
+        line-height: 1.5;
+      }
+
+      /* adjust link line */
+      .exec-foot .exec-link {
+        margin-top: 10px;
+      }
+    </style>
     <!-- AOS  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- swiper  -->
@@ -162,14 +269,6 @@
                     </defs>
                   </svg>
                 </a>
-                <a href="checkout.html" class="position-relative">
-                  <div class="side-icon bg1-color">
-                    <i class="ph ph-shopping-cart n11-color"></i>
-                  </div>
-                  <div class="cart-counter">
-                    <span class="n1-color">02</span>
-                  </div>
-                </a>
                 <div class="d-flex flex-column align-items-center gap-1">
                   <span class="toggle_name fs-eleven n5-color">DarkMode</span>
                   <button class="side-icon bg1-color mood_toggle">
@@ -202,22 +301,31 @@
                     Victor Han
                   </h4>
                   <span class="n5-color fs-nine d-block text-center"
-                    >Junior @Brookfield Central High School</span
+                    >Senior @Brookfield Central High School</span
                   >
                   <div
                     class="d-flex justify-content-center gap-2 align-items-center mt-4"
                   >
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-facebook-logo"></i>
+                    <a
+                      href="https://www.linkedin.com/in/victor-han-810406294/"
+                      target="”_blank”"
+                      class="social-icon"
+                    >
+                      <i class="ph ph-linkedin-logo p1-color"></i>
                     </a>
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-instagram-logo"></i>
+                    <a
+                      href="https://github.com/Victor-lyhan"
+                      target="”_blank”"
+                      class="social-icon"
+                    >
+                      <i class="ph ph-github-logo p1-color"></i>
                     </a>
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-x-logo"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-linkedin-logo"></i>
+                    <a
+                      href="https://www.youtube.com/@victorh1724"
+                      target="”_blank”"
+                      class="social-icon"
+                    >
+                      <i class="ph ph-youtube-logo p1-color"></i>
                     </a>
                   </div>
                 </div>
@@ -236,65 +344,28 @@
 
                     <li class="rounded-3 bg1-color">
                       <a
-                        href="portfolio.html"
+                        href="Parkinson.html"
                         class="d-flex justify-content-between align-items-center"
                       >
                         <div
                           class="d-flex align-items-center gap-2 n11-color fs-eight px-3 py-2"
                         >
-                          <i class="ph ph-code-block fs-six"></i> Portfolio
+                          <i class="ph ph-code-block fs-six"></i> Parkinson's
+                          Activities
                         </div>
-                        <span
-                          class="n5-color bg2-color fs-ten px-1 pt-1 rounded-2 me-3"
-                          >16</span
-                        >
                       </a>
                     </li>
                     <li class="rounded-3">
                       <a
-                        href="price.html"
+                        href="interests.html"
                         class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-briefcase fs-six"></i>Services &
-                        Pricing</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="resume.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-notebook fs-six"></i> Resume</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="products.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-shopping-bag fs-six"></i>Products</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="blog.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-newspaper-clipping fs-six"></i>Blog</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="contact.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-envelope fs-six"></i>Contact</a
+                        ><i class="ph ph-newspaper-clipping fs-six"></i
+                        >Athletics,Arts,Community</a
                       >
                     </li>
                   </ul>
                 </div>
               </div>
-              <a
-                href="contact.html"
-                class="primary-btn fw-medium px-3 px-md-6 py-2 py-md-4 rounded-pill d-flex align-items-center gap-2 mx-auto"
-              >
-                <i class="ph ph-paper-plane-tilt"></i>Hire Me
-              </a>
             </div>
           </div>
         </div>
@@ -361,14 +432,6 @@
           </a>
 
           <div class="d-flex gap-3 align-items-center">
-            <a href="checkout.html" class="position-relative">
-              <div class="side-icon bg1-color">
-                <i class="ph ph-shopping-cart n11-color"></i>
-              </div>
-              <div class="cart-counter-header">
-                <span class="n1-color">02</span>
-              </div>
-            </a>
             <button class="side-icon bg1-color mood_toggle">
               <i class="mood_icon ph-fill ph-moon fs-six n11-color"></i>
             </button>
@@ -526,20 +589,21 @@
               <h3
                 class="page-title fs-onefw-semibold n5-color mb-2 mb-md-3 text-center"
               >
-                An Auxiliary Rehabilitation Device for Parkinson’s Patients with
-                Finger Muscle Tremors and Stiffness
+                Hmong Community Health Access & Parkinson’s Early Screening in
+                Wisconsin
               </h3>
               <p class="fs-seven n5-color mb-4 mb-md-8 text-center">
-                Project intro goes here. In the intro it's a good idea to answer
-                a potential client's need/problem so it's more likely to land
-                your next project or job.
+                A mixed-methods, community co-design pilot with churches and
+                interpreters to close language-and-trust gaps in early neurology
+                screening. We ran <strong>25 interviews</strong>,
+                <strong>2 focus groups (n=12)</strong>, and
+                <strong>40</strong> bilingual Hmong/EN app walk-throughs.
+                Localization + community navigators improved outcomes:
+                <strong>completion 42%→68%</strong>, <strong>SUS 59→76</strong>,
+                and <strong>privacy drop-offs 31%→12%</strong>. Next: scale
+                navigators, on-demand interpreters, and monthly church
+                workshops.
               </p>
-              <a
-                href="contact.html"
-                class="w-max primary-btn fw-medium n11-color px-3 px-md-6 py-2 py-md-4 rounded-pill d-flex align-items-center gap-2 mx-auto"
-              >
-                <i class="ph ph-paper-plane-tilt"></i>Hire Me
-              </a>
             </div>
           </div>
           <div class="container mt-8 mt-md-15 pb-60">
@@ -550,32 +614,20 @@
                 >
                   <div>
                     <span class="n4-color fs-eight fw-medium d-block"
-                      >Client:</span
+                      >Year:</span
                     >
-                    <span class="n5-color fs-six fw-medium">Dev X</span>
+                    <span class="n5-color fs-six fw-medium">2025</span>
                   </div>
+
                   <div>
                     <span class="n4-color fs-eight fw-medium d-block"
-                      >Services</span
-                    >
-                    <span class="n5-color fs-six fw-medium"
-                      >Web Development</span
-                    >
-                  </div>
-                  <div>
-                    <span class="n4-color fs-eight fw-medium d-block"
-                      >Technologies</span
-                    >
-                    <span class="n5-color fs-six fw-medium">React JS</span>
-                  </div>
-                  <div>
-                    <span class="n4-color fs-eight fw-medium d-block"
-                      >Website</span
+                      >Link:</span
                     >
                     <a
-                      href="javascript:void(0)"
+                      href="./assets/images/Hmong Research Report.pdf"
                       class="n5-color fs-six fw-medium d-flex align-items-center gap-2"
-                      >Live preview <i class="ph-bold ph-arrow-right"></i
+                      >Full research report
+                      <i class="ph-bold ph-arrow-right"></i
                     ></a>
                   </div>
                 </div>
@@ -585,197 +637,180 @@
                 <div
                   class="project-details-content d-flex flex-column gap-8 gap-md-15"
                 >
-                  <div class="overflow-hidden">
-                    <img
-                      src="./assets/images/project1.png"
-                      alt="project"
-                      class="w-100 portfolio-details-img"
-                    />
-                  </div>
                   <div data-aos="fade-up">
-                    <p class="text-seven n4-color">
-                      Short description of the client and project requirements.
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Lorem ipsum dolor sit
-                      amet, consectetuer adipiscing elit. Aenean commodo ligula
-                      eget dolor.
+                    <h2 class="fs-one fw-semibold n5-color mb-2 mb-md-4">
+                      What did I do?
+                    </h2>
+                    <p class="fs-seven n5-color mb-4 mb-md-8 text-cente">
+                      I met with Hmong families where they are—at home, church,
+                      and community spaces—to listen and know how they do. I
+                      learned their biggest barriers: language and fear of
+                      expensive tests. I then brainstorm and tested methods to
+                      make them more comfortable in using health tech like the
+                      one I developed.
                     </p>
-                    <h3
-                      class="fs-five n5-color fw-semibold mt-5 mt-md-10 mb-2 mb-md-4"
-                    >
-                      Project Requirements
-                    </h3>
-                    <ul>
-                      <li class="n4-color fs-seven mb-2 mb-md-3">
-                        Requirement lorem ipsum dolor sit amet, consectetuer
-                        adipiscing elit.
-                      </li>
-                      <li class="n4-color fs-seven mb-2 mb-md-3">
-                        Requirement donec pede justo, fringilla vel, aliquet
-                        nec.
-                      </li>
-                      <li class="n4-color fs-seven mb-2 mb-md-3">
-                        Requirement phasellus ullamcorper ipsum rutrum nunc.
-                      </li>
-                    </ul>
+                    <h2 class="fs-one fw-semibold n5-color mb-2 mb-md-4">
+                      Why did I do this?
+                    </h2>
+                    <p class="fs-seven n5-color mb-4 mb-md-8 text-cente">
+                      I started this project after volunteering at the Wisconsin
+                      Parkinson’s Association conference and noticing how few
+                      minority families—especially Hmong—were there. I wanted to
+                      understand why: how they experience Parkinson’s, what
+                      blocks them from care, and how they feel about new tools.
+                      So I decided to listen first, then work with community
+                      members to co-create simple, culturally friendly education
+                      and earlier checks that actually reach the people being
+                      missed.
+                    </p>
                   </div>
                   <div data-aos="fade-up">
                     <h2 class="fs-one fw-semibold n5-color mb-2 mb-md-4">
-                      Project Overview
+                      Methods
                     </h2>
-                    <p class="text-seven n4-color">
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                      natoque penatibus et magnis dis parturient montes,
-                      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nulla consequat massa
-                      quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                      vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-                      a, venenatis vitae, justo. Nullam dictum felis eu pede
-                      mollis pretium. Integer tincidunt. Cras dapibus.
+                    <p class="fs-seven n5-color mb-4 mb-md-8 text-cente">
+                      I interviewed and talked to Hmong families either in
+                      person or virtually. To get to know them better, I went to
+                      their markets, visited their house, joined their family
+                      dinners, and even helped them ... farm.
                     </p>
-                  </div>
-                  <div data-aos="fade-up">
-                    <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
-                      The Challenge
-                    </h2>
-                    <p class="text-seven n4-color">
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                      natoque penatibus et magnis dis parturient montes,
-                      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nulla consequat massa
-                      quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                      vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-                      a, venenatis vitae, justo. Nullam dictum felis eu pede
-                      mollis pretium. Integer tincidunt. Cras dapibus.
-                    </p>
-                  </div>
-                  <div data-aos="fade-up">
-                    <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
-                      The Approach & Solution
-                    </h2>
-                    <p class="text-seven n4-color mb-5 mb-md-10">
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                      natoque penatibus et magnis dis parturient montes,
-                      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nulla consequat massa
-                      quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                      vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-                      a, venenatis vitae, justo. Nullam dictum felis eu pede
-                      mollis pretium. Integer tincidunt. Cras dapibus.
-                    </p>
-                    <div class="row g-3 g-md-6">
-                      <div class="col-sm-6 overflow-hidden">
-                        <img
-                          src="./assets/images/project2.png"
-                          alt="project"
-                          class="w-100 object-fit-cover portfolio-details-img"
-                        />
-                      </div>
-                      <div class="col-sm-6 overflow-hidden">
-                        <img
-                          src="./assets/images/project3.png"
-                          alt="project"
-                          class="w-100 object-fit-cover portfolio-details-img"
-                        />
-                      </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center flex-wrap gap-2"
+                    >
+                      <img
+                        src="./assets/images/hmong_interview.jpeg"
+                        alt="Seminar"
+                        class="portfolio-details-img"
+                        style="width: 48%; border-radius: 10px"
+                      />
+                      <img
+                        src="./assets/images/hmong_interview2.jpeg"
+                        alt="Webinar"
+                        class="portfolio-details-img"
+                        style="width: 48%; border-radius: 10px"
+                      />
                     </div>
-                    <p class="text-seven n4-color mt-5 mt-md-10">
-                      Short description of the client and project requirements.
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Lorem ipsum dolor sit
-                      amet, consectetuer adipiscing elit. Aenean commodo ligula
-                      eget dolor.
-                    </p>
                   </div>
-                  <div data-aos="fade-up">
-                    <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
-                      The Results
-                    </h2>
-                    <div class="row g-3 g-md-5">
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Efficiency</span
+
+                  <!-- Executive Summary -->
+                  <div class="exec-card mt-6 mb-10" data-aos="fade-up">
+                    <div class="exec-head">
+                      <span class="exec-badge">Executive Summary</span>
+                      <h3 class="fs-five fw-semibold n5-color m-0">
+                        What I learned at a glance
+                      </h3>
+                    </div>
+
+                    <div class="exec-grid">
+                      <!-- Left: bullets -->
+                      <div>
+                        <ul class="exec-bullets n5-color fs-seven">
+                          <li>
+                            <strong>Problem.</strong> Hmong families face
+                            language, interpreter, and privacy-friction that
+                            delay early neurology screening.
+                          </li>
+                          <li>
+                            <strong>Approach.</strong> Mixed-methods pilot with
+                            churches/interpreters: 25 interviews, 2 focus groups
+                            (n=12), and 40 bilingual app walk-throughs.
+                          </li>
+                          <li>
+                            <strong>What changed.</strong> Bilingual UI +
+                            community navigators improved completion, usability,
+                            and reduced privacy drop-offs.
+                          </li>
+                          <li>
+                            <strong>Do next.</strong> Launch on-demand
+                            interpreters, train navigators, embed bilingual
+                            consent/results, and run monthly church workshops.
+                          </li>
+                        </ul>
+
+                        <div class="exec-foot">
+                          <a
+                            href="./assets/images/Hmong Research Report.pdf"
+                            class="exec-link"
                           >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">20%</h4>
-                            <span class="fs-six n4-color fw-medium">up</span>
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
+                            <i class="ph-bold ph-file-text"></i> Read Full
+                            Report (PDF) Here
+                          </a>
                         </div>
                       </div>
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Customer Happy</span
-                          >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">14%</h4>
-                            <span class="fs-six n4-color fw-medium">up</span>
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Sales Generated</span
-                          >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">$130K</h4>
-                            <!-- <span class="fs-six n4-color fw-medium">k</span> -->
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Overall Cost</span
-                          >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">20%</h4>
-                            <span class="fs-six n4-color fw-medium">down</span>
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
-                        </div>
+
+                      <!-- Right: key metrics -->
+                      <div>
+                        <table class="exec-table">
+                          <thead>
+                            <tr>
+                              <th>Metric</th>
+                              <th>Baseline</th>
+                              <th>Post-Interv.</th>
+                              <th>Δ</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Task completion</td>
+                              <td>42%</td>
+                              <td>68%</td>
+                              <td>+26 pp</td>
+                            </tr>
+                            <tr>
+                              <td>SUS (0–100)</td>
+                              <td>59</td>
+                              <td>76</td>
+                              <td>+17</td>
+                            </tr>
+                            <tr>
+                              <td>Privacy drop-off</td>
+                              <td>31%</td>
+                              <td>12%</td>
+                              <td>−19 pp</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <p class="exec-note">
+                          <strong>Task completion:</strong> % of participants
+                          who fully finished app-based screening without
+                          assistance.<br />
+                          <strong>SUS (System Usability Scale):</strong>
+                          Standardized usability rating (0–100) — higher
+                          indicates smoother experience.<br />
+                          <strong>Privacy drop-off:</strong> % of users who
+                          stopped mid-screening due to privacy concerns or
+                          data-sharing hesitation.
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <p
-                    data-aos="fade-up"
-                    class="text-seven n4-color mb-8 mb-md-15"
-                  >
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                    natoque penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                    eu, pretium quis, sem. Nulla consequat massa quis enim.
-                    Donec pede justo, fringilla vel, aliquet nec, vulputate
-                    eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                    venenatis vitae, justo. Nullam dictum felis eu pede mollis
-                    pretium. Integer tincidunt. Cras dapibus.
-                  </p>
+
+                  <div data-aos="fade-up">
+                    <h2 class="fs-one fw-semibold n5-color mb-2 mb-md-4">
+                      Final Remark
+                    </h2>
+                    <p
+                      data-aos="fade-up"
+                      class="fs-seven n5-color mb-4 mb-md-8"
+                    >
+                      Studies like this show how important it is to culturally
+                      tune the design and technology to raise completion and
+                      usability while reducing privacy drop-offs in terms of
+                      health-tech.
+                    </p>
+                  </div>
                 </div>
+                <a
+                  href="Parkinson.html"
+                  class="pdg-hint"
+                  aria-label="Back to Parkinson's Activities"
+                >
+                  <span class="pdg-hint__arrows" aria-hidden="true">← ← ←</span>
+                  <span class="pdg-hint__label"
+                    >Back to<br />Parkinson’s Activities</span
+                  >
+                </a>
               </div>
             </div>
           </div>
@@ -795,7 +830,7 @@
             ></span
           >
           <span class="fs-eight fw-medium n5-color order-sm-1"
-            >Copyright © 2024
+            >Copyright © 2025
             <a href="index.html" class="fs-eight fw-medium n5-color"
               >Victor Han</a
             >. All Rights Reserved.</span

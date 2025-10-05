@@ -22,6 +22,26 @@
     />
     <!-- ==== css dependencies start ==== -->
     <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      /* two-column split inside the main (right) content area */
+      .pdg-split {
+        display: grid;
+        grid-template-columns: 1fr; /* single column on mobile */
+        gap: 24px;
+        align-items: start;
+      }
+      @media (min-width: 1200px) {
+        .pdg-split {
+          grid-template-columns: 1fr 420px; /* text | video on desktop */
+        }
+      }
+
+      /* sticky video on desktop so it stays visible while scrolling */
+      .pdg-video-aside {
+        position: sticky;
+        top: 24px;
+      }
+    </style>
     <!-- AOS  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- swiper  -->
@@ -162,14 +182,6 @@
                     </defs>
                   </svg>
                 </a>
-                <a href="checkout.html" class="position-relative">
-                  <div class="side-icon bg1-color">
-                    <i class="ph ph-shopping-cart n11-color"></i>
-                  </div>
-                  <div class="cart-counter">
-                    <span class="n1-color">02</span>
-                  </div>
-                </a>
                 <div class="d-flex flex-column align-items-center gap-1">
                   <span class="toggle_name fs-eleven n5-color">DarkMode</span>
                   <button class="side-icon bg1-color mood_toggle">
@@ -202,22 +214,31 @@
                     Victor Han
                   </h4>
                   <span class="n5-color fs-nine d-block text-center"
-                    >Junior @Brookfield Central High School</span
+                    >Senior @Brookfield Central High School</span
                   >
                   <div
                     class="d-flex justify-content-center gap-2 align-items-center mt-4"
                   >
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-facebook-logo"></i>
+                    <a
+                      href="https://www.linkedin.com/in/victor-han-810406294/"
+                      target="”_blank”"
+                      class="social-icon"
+                    >
+                      <i class="ph ph-linkedin-logo p1-color"></i>
                     </a>
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-instagram-logo"></i>
+                    <a
+                      href="https://github.com/Victor-lyhan"
+                      target="”_blank”"
+                      class="social-icon"
+                    >
+                      <i class="ph ph-github-logo p1-color"></i>
                     </a>
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-x-logo"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="social-icon p1-color">
-                      <i class="ph ph-linkedin-logo"></i>
+                    <a
+                      href="https://www.youtube.com/@victorh1724"
+                      target="”_blank”"
+                      class="social-icon"
+                    >
+                      <i class="ph ph-youtube-logo p1-color"></i>
                     </a>
                   </div>
                 </div>
@@ -236,65 +257,28 @@
 
                     <li class="rounded-3 bg1-color">
                       <a
-                        href="portfolio.html"
+                        href="Parkinson.html"
                         class="d-flex justify-content-between align-items-center"
                       >
                         <div
                           class="d-flex align-items-center gap-2 n11-color fs-eight px-3 py-2"
                         >
-                          <i class="ph ph-code-block fs-six"></i> Portfolio
+                          <i class="ph ph-code-block fs-six"></i> Parkinson's
+                          Activities
                         </div>
-                        <span
-                          class="n5-color bg2-color fs-ten px-1 pt-1 rounded-2 me-3"
-                          >16</span
-                        >
                       </a>
                     </li>
                     <li class="rounded-3">
                       <a
-                        href="price.html"
+                        href="interests.html"
                         class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-briefcase fs-six"></i>Services &
-                        Pricing</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="resume.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-notebook fs-six"></i> Resume</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="products.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-shopping-bag fs-six"></i>Products</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="blog.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-newspaper-clipping fs-six"></i>Blog</a
-                      >
-                    </li>
-                    <li class="rounded-3">
-                      <a
-                        href="contact.html"
-                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
-                        ><i class="ph ph-envelope fs-six"></i>Contact</a
+                        ><i class="ph ph-newspaper-clipping fs-six"></i
+                        >Athletics,Arts,Community</a
                       >
                     </li>
                   </ul>
                 </div>
               </div>
-              <a
-                href="contact.html"
-                class="primary-btn fw-medium px-3 px-md-6 py-2 py-md-4 rounded-pill d-flex align-items-center gap-2 mx-auto"
-              >
-                <i class="ph ph-paper-plane-tilt"></i>Hire Me
-              </a>
             </div>
           </div>
         </div>
@@ -396,7 +380,7 @@
               </li>
               <li class="rounded-3 bg1-color">
                 <a
-                  href="portfolio.html"
+                  href="Parkinson.html"
                   class="d-flex justify-content-between align-items-center"
                 >
                   <div
@@ -407,55 +391,15 @@
                     >
                       <i class="ph-fill ph-code-block"></i>
                     </span>
-                    <span class="d-none d-md-block">Portfolio</span>
+                    <span class="d-none d-md-block"
+                      >Parkinson’s Activities</span
+                    >
                   </div>
-                  <span
-                    class="n5-color bg2-color fs-ten px-1 pt-1 rounded-2 me-3 d-none d-md-block"
-                    >16</span
-                  >
                 </a>
               </li>
               <li>
                 <a
-                  href="price.html"
-                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
-                >
-                  <span
-                    class="fs-five d-flex align-items-center justify-content-center"
-                  >
-                    <i class="ph-fill ph-briefcase"></i>
-                  </span>
-                  <span class="d-none d-md-block">Pricing</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="resume.html"
-                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
-                >
-                  <span
-                    class="fs-five d-flex align-items-center justify-content-center"
-                    ><i class="ph-fill ph-notebook fs-six"></i
-                  ></span>
-                  <span class="d-none d-md-block">Resume</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="products.html"
-                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
-                >
-                  <span
-                    class="fs-five d-flex align-items-center justify-content-center"
-                  >
-                    <i class="ph-fill ph-shopping-bag"></i>
-                  </span>
-                  <span class="d-none d-md-block">Products</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="blog.html"
+                  href="interests.html"
                   class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
                 >
                   <span
@@ -463,19 +407,9 @@
                   >
                     <i class="ph-fill ph-newspaper-clipping"></i>
                   </span>
-                  <span class="d-none d-md-block">Blog</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="contact.html"
-                  class="d-flex align-items-center gap-2 n5-color fs-eight p-2"
-                >
-                  <span
-                    class="fs-five d-flex align-items-center justify-content-center"
-                    ><i class="ph-fill ph-envelope"></i
-                  ></span>
-                  <span class="d-none d-md-block">Contact</span>
+                  <span class="d-none d-md-block"
+                    >Athletics,Arts,Community</span
+                  >
                 </a>
               </li>
             </ul>
@@ -526,20 +460,17 @@
               <h3
                 class="page-title fs-onefw-semibold n5-color mb-2 mb-md-3 text-center"
               >
-                An Auxiliary Rehabilitation Device for Parkinson’s Patients with
-                Finger Muscle Tremors and Stiffness
+                ParkinAid Nonprofit Organization
               </h3>
               <p class="fs-seven n5-color mb-4 mb-md-8 text-center">
-                Project intro goes here. In the intro it's a good idea to answer
-                a potential client's need/problem so it's more likely to land
-                your next project or job.
+                Founded to make Parkinson’s education, diagnosis, and
+                rehabilitation accessible to all. ParkinAid combines
+                <strong>community outreach</strong>,
+                <strong>AI-driven diagnostics</strong>, and
+                <strong>cultural collaboration</strong>
+                to bring earlier detection and better care to families in my
+                local area.
               </p>
-              <a
-                href="contact.html"
-                class="w-max primary-btn fw-medium n11-color px-3 px-md-6 py-2 py-md-4 rounded-pill d-flex align-items-center gap-2 mx-auto"
-              >
-                <i class="ph ph-paper-plane-tilt"></i>Hire Me
-              </a>
             </div>
           </div>
           <div class="container mt-8 mt-md-15 pb-60">
@@ -550,33 +481,24 @@
                 >
                   <div>
                     <span class="n4-color fs-eight fw-medium d-block"
-                      >Client:</span
+                      >Year:</span
                     >
-                    <span class="n5-color fs-six fw-medium">Dev X</span>
+                    <span class="n5-color fs-six fw-medium">2024-Present</span>
                   </div>
                   <div>
                     <span class="n4-color fs-eight fw-medium d-block"
-                      >Services</span
+                      >Achievements:</span
                     >
-                    <span class="n5-color fs-six fw-medium"
-                      >Web Development</span
+                    <ul
+                      class="n5-color fs-six fw-medium ps-3"
+                      style="list-style: disc"
                     >
-                  </div>
-                  <div>
-                    <span class="n4-color fs-eight fw-medium d-block"
-                      >Technologies</span
-                    >
-                    <span class="n5-color fs-six fw-medium">React JS</span>
-                  </div>
-                  <div>
-                    <span class="n4-color fs-eight fw-medium d-block"
-                      >Website</span
-                    >
-                    <a
-                      href="javascript:void(0)"
-                      class="n5-color fs-six fw-medium d-flex align-items-center gap-2"
-                      >Live preview <i class="ph-bold ph-arrow-right"></i
-                    ></a>
+                      <li>Reached 2,000+ community members</li>
+                      <li>18 benefit concerts, raised ~$5600</li>
+                      <li>
+                        6 partner orgs; 3 expert webinars; volunteer team of 8
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -585,197 +507,166 @@
                 <div
                   class="project-details-content d-flex flex-column gap-8 gap-md-15"
                 >
-                  <div class="overflow-hidden">
-                    <img
-                      src="./assets/images/project1.png"
-                      alt="project"
-                      class="w-100 portfolio-details-img"
-                    />
-                  </div>
                   <div data-aos="fade-up">
-                    <p class="text-seven n4-color">
-                      Short description of the client and project requirements.
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Lorem ipsum dolor sit
-                      amet, consectetuer adipiscing elit. Aenean commodo ligula
-                      eget dolor.
+                    <h2 class="fs-one fw-semibold n5-color mb-2 mb-md-4">
+                      Who we are?
+                    </h2>
+                    <p class="n4-color fs-seven mb-2 mb-md-3">
+                      ParkinAid is a students-ran nonprofit building accessible,
+                      human-centered tools and community for people with
+                      Parkinson’s.
                     </p>
                     <h3
                       class="fs-five n5-color fw-semibold mt-5 mt-md-10 mb-2 mb-md-4"
                     >
-                      Project Requirements
+                      What did we do?
                     </h3>
                     <ul>
                       <li class="n4-color fs-seven mb-2 mb-md-3">
-                        Requirement lorem ipsum dolor sit amet, consectetuer
-                        adipiscing elit.
+                        <strong
+                          >Develop and promote the use of AI-driven diagnostic
+                          tools</strong
+                        >
+                        that enable early detection of Parkinson’s through
+                        accessible, video- and voice-based analysis.
                       </li>
                       <li class="n4-color fs-seven mb-2 mb-md-3">
-                        Requirement donec pede justo, fringilla vel, aliquet
-                        nec.
+                        <strong
+                          >Host seminars and webinars to raise public
+                          awareness</strong
+                        >
+                        about Parkinson’s symptoms, prevention, and treatment
+                        options either by us or invited guest
+                        speakers(professionals in the field).
                       </li>
                       <li class="n4-color fs-seven mb-2 mb-md-3">
-                        Requirement phasellus ullamcorper ipsum rutrum nunc.
+                        <strong>Conduct community outreach</strong>—performing
+                        music and volunteering in senior living centers,
+                        hospitals, and local events to bring care and comfort.
+                      </li>
+                      <li class="n4-color fs-seven mb-2 mb-md-3">
+                        <strong>Raise funds</strong> to donate to related
+                        disease research organization by organizing small scale
+                        benefit concerns.
                       </li>
                     </ul>
                   </div>
                   <div data-aos="fade-up">
                     <h2 class="fs-one fw-semibold n5-color mb-2 mb-md-4">
-                      Project Overview
+                      Org + Tool Promotion
                     </h2>
-                    <p class="text-seven n4-color">
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                      natoque penatibus et magnis dis parturient montes,
-                      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nulla consequat massa
-                      quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                      vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-                      a, venenatis vitae, justo. Nullam dictum felis eu pede
-                      mollis pretium. Integer tincidunt. Cras dapibus.
+                    <p class="fs-seven n4-color">
+                      We promote the nonprofit and the use of Parkinson's
+                      diagnostics tool in public events and is working to parter
+                      with Wisconsin Parkinson's Association.
                     </p>
-                  </div>
-                  <div data-aos="fade-up">
-                    <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
-                      The Challenge
-                    </h2>
-                    <p class="text-seven n4-color">
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                      natoque penatibus et magnis dis parturient montes,
-                      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nulla consequat massa
-                      quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                      vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-                      a, venenatis vitae, justo. Nullam dictum felis eu pede
-                      mollis pretium. Integer tincidunt. Cras dapibus.
-                    </p>
-                  </div>
-                  <div data-aos="fade-up">
-                    <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
-                      The Approach & Solution
-                    </h2>
-                    <p class="text-seven n4-color mb-5 mb-md-10">
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                      natoque penatibus et magnis dis parturient montes,
-                      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nulla consequat massa
-                      quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                      vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-                      a, venenatis vitae, justo. Nullam dictum felis eu pede
-                      mollis pretium. Integer tincidunt. Cras dapibus.
-                    </p>
-                    <div class="row g-3 g-md-6">
-                      <div class="col-sm-6 overflow-hidden">
-                        <img
-                          src="./assets/images/project2.png"
-                          alt="project"
-                          class="w-100 object-fit-cover portfolio-details-img"
-                        />
-                      </div>
-                      <div class="col-sm-6 overflow-hidden">
-                        <img
-                          src="./assets/images/project3.png"
-                          alt="project"
-                          class="w-100 object-fit-cover portfolio-details-img"
-                        />
-                      </div>
+                    <div class="overflow-hidden">
+                      <img
+                        src="./assets/images/pd_promotion.jpg"
+                        alt="project"
+                        class="w-100 portfolio-details-img"
+                      />
                     </div>
-                    <p class="text-seven n4-color mt-5 mt-md-10">
-                      Short description of the client and project requirements.
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                      Aenean commodo ligula eget dolor. Lorem ipsum dolor sit
-                      amet, consectetuer adipiscing elit. Aenean commodo ligula
-                      eget dolor.
-                    </p>
                   </div>
+
+                  <div data-aos="fade-up">
+                    <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
+                      Seminars and Webinars
+                    </h2>
+                    <p class="fs-seven n4-color">
+                      We host in person and virtual seminars to raise people's
+                      (student + adults) awareness of Parkinson's.
+                    </p>
+                    <div
+                      class="d-flex justify-content-center align-items-center flex-wrap gap-2"
+                    >
+                      <img
+                        src="./assets/images/pd_seminar.jpg"
+                        alt="Seminar"
+                        class="portfolio-details-img"
+                        style="width: 48%; border-radius: 10px"
+                      />
+                      <img
+                        src="./assets/images/pd_webinar.jpg"
+                        alt="Webinar"
+                        class="portfolio-details-img"
+                        style="width: 48%; border-radius: 10px"
+                      />
+                    </div>
+                  </div>
+
+                  <div data-aos="fade-up">
+                    <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
+                      Community Outreach
+                    </h2>
+                    <p class="fs-seven n4-color">
+                      We believe that technology is only meaningful when it
+                      reaches people. ParkinAid regularly organizes community
+                      visits to senior living centers, hospitals, and local
+                      health fairs, where our volunteers offer companionship,
+                      music performances, and interactive demonstrations of our
+                      assistive technologies. Through these visits, we aim to
+                      reduce stigma, raise awareness, and bring emotional
+                      support to individuals and families affected by
+                      Parkinson’s. Our outreach team also collaborates with
+                      healthcare workers and caregivers to provide educational
+                      sessions, bridging the gap between clinical understanding
+                      and daily lived experience.
+                    </p>
+                    <div
+                      class="d-flex justify-content-center align-items-center flex-wrap gap-2"
+                    >
+                      <img
+                        src="./assets/images/pd_performance.jpg"
+                        alt="Seminar"
+                        class="portfolio-details-img"
+                        style="width: 48%; border-radius: 10px"
+                      />
+                      <img
+                        src="./assets/images/pd_fair.jpg"
+                        alt="Webinar"
+                        class="portfolio-details-img"
+                        style="width: 48%; border-radius: 10px"
+                      />
+                    </div>
+                  </div>
+
                   <div data-aos="fade-up">
                     <h2 class="fs-two fw-semibold n5-color mb-2 mb-md-4">
                       The Results
                     </h2>
-                    <div class="row g-3 g-md-5">
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Efficiency</span
-                          >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">20%</h4>
-                            <span class="fs-six n4-color fw-medium">up</span>
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Customer Happy</span
-                          >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">14%</h4>
-                            <span class="fs-six n4-color fw-medium">up</span>
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Sales Generated</span
-                          >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">$130K</h4>
-                            <!-- <span class="fs-six n4-color fw-medium">k</span> -->
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-xl-4 col-xxl-3">
-                        <div class="bgn2-color brn4 p-3 p-md-5">
-                          <span class="p1-color fs-six fw-medium mb-2 d-block"
-                            >Overall Cost</span
-                          >
-                          <div
-                            class="d-flex align-items-end gap-1 mb-2 mb-md-3"
-                          >
-                            <h4 class="fs-three n5-color fw-semibold">20%</h4>
-                            <span class="fs-six n4-color fw-medium">down</span>
-                          </div>
-                          <p class="fs-eight n4-color">
-                            Metric description lorem ipsum dolor sit amet.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    <p class="fs-seven n4-color">
+                      Through its initiatives, ParkinAid has created measurable
+                      community impact—<strong
+                        >bringing technology, awareness, and compassion
+                        together</strong
+                      >. By developing and sharing
+                      <strong>AI-powered diagnostic tools</strong>, we’ve helped
+                      make early Parkinson’s detection more accessible to
+                      patients and families. Our
+                      <strong>seminars and webinars</strong> have reached wide
+                      audiences, improving understanding of symptoms, treatment
+                      options, and care pathways. Through
+                      <strong>community outreach</strong> in senior living
+                      centers, hospitals, and local events, our volunteers have
+                      offered both education and emotional support—using music,
+                      companionship, and demonstrations to restore connection
+                      and dignity. Finally, our
+                      <strong>fundraising efforts</strong> have supported
+                      research in the field.
+                    </p>
                   </div>
-                  <p
-                    data-aos="fade-up"
-                    class="text-seven n4-color mb-8 mb-md-15"
-                  >
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                    natoque penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                    eu, pretium quis, sem. Nulla consequat massa quis enim.
-                    Donec pede justo, fringilla vel, aliquet nec, vulputate
-                    eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                    venenatis vitae, justo. Nullam dictum felis eu pede mollis
-                    pretium. Integer tincidunt. Cras dapibus.
-                  </p>
                 </div>
+                <a
+                  href="Parkinson.html"
+                  class="pdg-hint"
+                  aria-label="Back to Parkinson's Activities"
+                >
+                  <span class="pdg-hint__arrows" aria-hidden="true">← ← ←</span>
+                  <span class="pdg-hint__label"
+                    >Back to<br />Parkinson’s Activities</span
+                  >
+                </a>
               </div>
             </div>
           </div>
@@ -795,7 +686,7 @@
             ></span
           >
           <span class="fs-eight fw-medium n5-color order-sm-1"
-            >Copyright © 2024
+            >Copyright © 2025
             <a href="index.html" class="fs-eight fw-medium n5-color"
               >Victor Han</a
             >. All Rights Reserved.</span
