@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>FTC Robotics — GEarheads 16460 | Victor Han</title>
+    <meta
+      name="description"
+      content="FTC Team 16460 GEarheads — Worlds portfolio: my role, robot subsystems, software & controls, strategy & DHF, outreach, results, and downloads."
+    />
+    <link
+      rel="shortcut icon"
+      href="assets/images/logo.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+      .toc {
+        position: sticky;
+        top: 24px;
+      }
+      .toc a {
+        display: block;
+        padding: 0.35rem 0.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-bottom: 6px;
+      }
+      .toc a.active {
+        background: rgba(var(--p1), 0.12);
+        color: rgba(var(--p1));
+      }
+
+      .grid-3 {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 992px) {
+        .grid-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .card {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 14px;
+        background: var(--n2, #fff);
+        overflow: hidden;
+      }
+      .card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .card .body {
+        padding: 14px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        margin-right: 6px;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+          "Liberation Mono", monospace;
+      }
+
+      /* intro video */
+      .video-wrap {
+        border-radius: 14px;
+        overflow: hidden;
+        background: #000;
+      }
+      .video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Keep the intro video a normal rectangle (no weird oval) */
+      .video-wrap,
+      .video-wrap video {
+        border-radius: 12px !important; /* use 0 if you want sharp corners */
+        overflow: visible !important;
+        clip-path: none !important;
+        -webkit-clip-path: none !important;
+        mask: none !important;
+        -webkit-mask: none !important;
+      }
+      .video-wrap * {
+        clip-path: none !important;
+        -webkit-clip-path: none !important;
+        mask: none !important;
+        -webkit-mask: none !important;
+      }
+
+      /* Modal shell (covers viewport, no page overflow) */
+      .deck-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        z-index: 9999;
+      }
+      .deck-modal.show {
+        display: block;
+      }
+      .deck-dialog {
+        position: absolute;
+        inset: 4% 3%;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /* inside modal only */
+      }
+
+      /* Close button */
+      .deck-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+      }
+
+      /* Stage: the swiper area takes available space */
+      .deck-stage {
+        flex: 1;
+        min-height: 0; /* important for flex children sizing */
+        background: #fff;
+      }
+
+      /* Swiper fills the stage */
+      #deck-swiper-modal {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Center images and keep them contained */
+      #deck-swiper-modal .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+      }
+      #deck-swiper-modal .swiper-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain; /* use 'cover' if you want edge-to-edge with cropping */
+      }
+
+      /* Footer with counter + download */
+      .deck-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 12px;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        background: #fff;
+      }
+
+      /* Make the portfolio + PDF buttons pop in blue */
+      .btn.primary {
+        background: rgba(var(--p1), 1);
+        color: #fff;
+        border: none;
+        font-weight: 600;
+        transition: background 0.2s ease, transform 0.1s ease;
+      }
+      .btn.primary:hover {
+        background: rgba(var(--p1), 0.85);
+        transform: translateY(-1px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- preloader -->
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+
+    <div class="d-lg-flex gap-lg-6">
+      <!-- sidebar (same component as other pages) -->
+      <div class="side-menu">
+        <div class="sidebar-btn close-btn cursor-pointer d-block d-lg-none">
+          <i class="ph ph-x fs-two p1-color"></i>
+        </div>
+
+        <div class="d-flex">
+          <div class="side-menu-left">
+            <div
+              class="d-flex flex-column gap-8 justify-content-center align-items-center mt-6"
+            >
+              <a href="index.html" class="side-icon bgn2-color brn4">
+                <i class="ph ph-caret-left"></i>
+              </a>
+              <div class="d-flex flex-column align-items-center gap-1">
+                <span class="toggle_name fs-eleven n5-color">Dark Mode</span>
+                <button class="side-icon bg1-color mood_toggle">
+                  <i class="mood_icon ph-fill ph-moon fs-six n11-color"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-menu-right overflow-y-auto">
+            <div
+              class="d-flex flex-column gap-6 justify-content-between py-10 px-5 bgn2-color h-100"
+            >
+              <div>
+                <div class="sidebar-profile">
+                  <div class="position-relative">
+                    <div
+                      class="profile-img1 d-flex justify-content-center overflow-hidden"
+                    >
+                      <img src="./assets/images/profile.png" alt="user" />
+                    </div>
+                    <span class="thumb">🤖</span>
+                  </div>
+                  <h4 class="n5-color fw-semibold fs-five mt-2 text-center">
+                    Victor Han
+                  </h4>
+                  <span class="n5-color fs-nine d-block text-center"
+                    >Senior @Brookfield Central High School</span
+                  >
+                  <div
+                    class="d-flex justify-content-center gap-2 align-items-center mt-4"
+                  >
+                    <a
+                      href="https://www.linkedin.com/in/victor-han-810406294/"
+                      target="_blank"
+                      class="social-icon"
+                      ><i class="ph ph-linkedin-logo p1-color"></i
+                    ></a>
+                    <a
+                      href="https://github.com/Victor-lyhan"
+                      target="_blank"
+                      class="social-icon"
+                      ><i class="ph ph-github-logo p1-color"></i
+                    ></a>
+                    <a
+                      href="https://www.youtube.com/@victorh1724"
+                      target="_blank"
+                      class="social-icon"
+                      ><i class="ph ph-youtube-logo p1-color"></i
+                    ></a>
+                  </div>
+                </div>
+
+                <div class="line-divider my-4 my-md-8"></div>
+
+                <div class="menu-list">
+                  <ul class="d-flex flex-column gap-3">
+                    <li class="rounded-3">
+                      <a
+                        href="index.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-user fs-six"></i> About Me</a
+                      >
+                    </li>
+                    <li class="rounded-3">
+                      <a
+                        href="Parkinson.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-code-block fs-six"></i> Parkinson's
+                        Activities</a
+                      >
+                    </li>
+                    <li class="rounded-3 bg1-color">
+                      <a
+                        href="robotics.html"
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div
+                          class="d-flex align-items-center gap-2 n11-color fs-eight px-3 py-2"
+                        >
+                          <i class="ph ph-robot fs-six"></i> Robotics
+                        </div>
+                      </a>
+                    </li>
+                    <li class="rounded-3">
+                      <a
+                        href="interests.html"
+                        class="d-flex align-items-center gap-2 n5-color fs-eight px-3 py-2"
+                        ><i class="ph ph-newspaper-clipping fs-six"></i>
+                        Athletics,Arts,Community</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /left column -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /sidebar -->
+
+      <!-- main -->
+      <div class="main-content w-100 overflow-visible">
+        <!-- mobile header -->
+        <div
+          class="w-100 bgn1-color p-3 position-fixed z-3 top-0 d-lg-none d-flex align-items-center justify-content-between br-bottom-n5 box-shadow1"
+        >
+          <a href="index.html" class="side-icon bgn2-color brn4">
+            <i class="ph ph-caret-left fs-six"></i>
+          </a>
+          <div class="d-flex gap-3 align-items-center">
+            <button class="side-icon bg1-color mood_toggle">
+              <i class="mood_icon ph-fill ph-moon fs-six n11-color"></i>
+            </button>
+          </div>
+        </div>
+
+        <section class="pt-120 pb-120 mt-10 mt-lg-0">
+          <div class="container">
+            <!-- Page heading -->
+            <div class="pb-40" data-aos="zoom-in">
+              <h1
+                class="page-title fs-one fw-semibold n5-color mb-2 mb-md-3 text-center"
+              >
+                FTC Robotics - 16460 GEarheads
+              </h1>
+              <p class="fs-six n5-color mb-4 mb-md-8 text-center">
+                I have been engaged with robotics since middle school. I joined
+                FTC team 16460 in high school. <br />
+                We aim to build world-class robot, disciplined engineering, and
+                community impact. <br />
+                This page shows examples of my role and impact in
+                software&design and the team's achievements in last season.
+              </p>
+            </div>
+
+            <div class="row g-6">
+              <!-- small sticky toc -->
+              <div class="col-12 col-xl-3 order-2 order-xl-1">
+                <nav class="toc brn4 p-3 rounded bgn2-color">
+                  <strong class="fs-eight d-block mb-2">On this page</strong>
+                  <a href="#intro" class="n5-color fs-nine">Demo Video</a>
+                  <a href="#role" class="n5-color fs-nine"
+                    >My Role & Team Portdolio</a
+                  >
+                  <a href="#subsystems" class="n5-color fs-nine"
+                    >Robot Subsystems</a
+                  >
+                  <a href="#software" class="n5-color fs-nine"
+                    >Software & Controls</a
+                  >
+                  <a href="#strategy" class="n5-color fs-nine"
+                    >Strategy & Analysis</a
+                  >
+                  <a href="#iterations" class="n5-color fs-nine"
+                    >Design Iterations</a
+                  >
+                  <a href="#outreach" class="n5-color fs-nine"
+                    >Outreach & Impact</a
+                  >
+                </nav>
+              </div>
+
+              <!-- MAIN CONTENT -->
+              <div class="col-12 col-xl-9 order-1 order-xl-2">
+                <div
+                  class="project-details-content d-flex flex-column gap-8 gap-md-15"
+                >
+                  <!-- INTRO VIDEO (your request: use robo_*robot*Demo first; fallback to robo_roboDemo) -->
+                  <section
+                    id="intro"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    <h2 class="fs-two fw-semibold n5-color mb-2">
+                      Intro: Robot Demo
+                    </h2>
+                    <div class="video-wrap">
+                      <video
+                        class="video"
+                        controls
+                        playsinline
+                        muted
+                        preload="metadata"
+                        poster="assets/images/robotics/robo_robot2.png"
+                      >
+                        <source
+                          src="assets/images/robotics/robo_robotDemo.mp4"
+                          type="video/mp4"
+                        />
+                        <source
+                          src="assets/images/robotics/robo_roboDemo.mp4"
+                          type="video/mp4"
+                        />
+                        Sorry—your browser can’t play the intro video.
+                      </video>
+                    </div>
+                  </section>
+
+                  <!-- ROLE + SLIDE DECK CAROUSEL -->
+                  <section id="role" data-aos="fade-up" data-aos-duration="800">
+                    <h2 class="fs-two fw-semibold n5-color mb-2">
+                      My Role & Team Portfolio
+                    </h2>
+                    <p class="n5-color fs-seven">
+                      I served as
+                      <strong>Team Captain, Software Lead now</strong>
+                      and <strong>Co-Software Lead in Junior year</strong>,
+                      developing the robot with
+                      <span class="pill">PIDF + motion profiles</span>
+                      <span class="pill"
+                        >time-based state machines + command structure</span
+                      >
+                      <span class="pill">field-centric drive</span>
+                      <span class="pill"
+                        >vision-assisted autonomous with inverse
+                        kinematics</span
+                      >
+                      and the
+                      <span class="pill">requirements → FMEA → DHF</span>
+                      document that shaped our design decisions. Below is our
+                      <em>team engineering portfolio</em> that summarized mine
+                      and my team's achievements last year.
+                    </p>
+
+                    <!-- Deck trigger -->
+                    <div class="mt-3">
+                      <button class="btn primary" id="openDeck">
+                        <i class="ph ph-monitor-play"></i> Open Portfolio (16
+                        slides)
+                      </button>
+                      <a
+                        class="btn primary"
+                        href="assets/images/robotics/robo_portfolio.pdf"
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        <i class="ph ph-download-simple"></i> Download PDF
+                      </a>
+                    </div>
+
+                    <p class="n5-color fs-seven">
+                      <br />
+                      Below are some examples of what me and my team did both
+                      technically and in community.
+                    </p>
+                  </section>
+
+                  <!-- ROBOT SUBSYSTEMS -->
+                  <section
+                    id="subsystems"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    <h2 class="fs-two fw-semibold n5-color mb-2">
+                      Robot Subsystems
+                    </h2>
+                    <div class="grid-3">
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_drivetrain.png"
+                          alt="Drivetrain & odometry"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            Drivetrain & Odometry
+                          </h4>
+                          <p class="fs-eight n4-color">
+                            Low-CoG mecanum base with optical odometry;
+                            intuitive field-centric driving.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_elevator.png"
+                          alt="Differential lift + turret arm"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            Differential Lift + Turret Arm
+                          </h4>
+                          <p class="fs-eight n4-color">
+                            <span class="mono">v1+v2 → lift</span>,
+                            <span class="mono">v1−v2 → rotation</span>; compact
+                            and precise.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_intake.png"
+                          alt="Intake & end-effector"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            Intake & End-Effector
+                          </h4>
+                          <p class="fs-eight n4-color">
+                            Fast secure grabs; geometry tuned for reliable
+                            handoffs.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_lift.png"
+                          alt="Ascent system"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            Ascent (PTO)
+                          </h4>
+                          <p class="fs-eight n4-color">
+                            Drivetrain PTO to winch; controlled current-limited
+                            Level-3 hang.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <!-- SOFTWARE & CONTROLS -->
+                  <section
+                    id="software"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    <h2 class="fs-two fw-semibold n5-color mb-2">
+                      Software & Controls
+                    </h2>
+                    <!-- “show all pictures; click to see description” -->
+                    <div class="grid-3">
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_fov.png"
+                          alt="Field-centric drive math"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            Field-Centric Drive
+                          </h4>
+                          <details class="mt-1">
+                            <summary class="fs-nine n5-color">
+                              Click for Description
+                            </summary>
+                            <p class="fs-eight n4-color mt-2">
+                              Allows easier driving by transforming joystick
+                              inputs by robot heading:
+                              <span class="mono">x' = x cosθ + y sinθ</span>,
+                              <span class="mono">y' = −x sinθ + y cosθ</span>,
+                              keeping driver controls intuitive at any
+                              orientation.
+                            </p>
+                          </details>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_pidMp.png"
+                          alt="PIDF and motion profiles"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            PIDF & Motion Profiles
+                          </h4>
+                          <details class="mt-1">
+                            <summary class="fs-nine n5-color">
+                              Click for Description
+                            </summary>
+                            <p class="fs-eight n4-color mt-2">
+                              Segmented PIDF + trapezoidal profiles limit
+                              accel/vel for smooth, repeatable lift & arm
+                              trajectories; tuned per segment.
+                            </p>
+                          </details>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_camera.png"
+                          alt="Camera-assisted autonomous"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            Camera-Assisted Auto
+                          </h4>
+                          <details class="mt-1">
+                            <summary class="fs-nine n5-color">
+                              Click for Description
+                            </summary>
+                            <p class="fs-eight n4-color mt-2">
+                              Vision tags samples, planner selects the nearest
+                              legal target, then executes a pose-corrected
+                              trajectory for consistent auto points.
+                            </p>
+                          </details>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <!-- STRATEGY & DHF -->
+                  <section
+                    id="strategy"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    <h2 class="fs-two fw-semibold n5-color mb-2">
+                      Strategy & Design History Framework (DHF)
+                    </h2>
+                    <p class="fs-seven n5-color">
+                      We followed a lightweight
+                      <strong>DHF</strong> discipline—<em
+                        >Requirements(Gamepoint matrix) → Risk (FMEA) →
+                        Controls/Design Decisions → Verification(Monte
+                        Carlo)</em
+                      >—so every subsystem change tied back to match value and
+                      reliability. This professional flow let us debate ideas
+                      with data, not opinion.
+                    </p>
+                    <div class="grid-3">
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_DHF.png"
+                          alt="Design History Framework overview"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            DHF (Process)
+                          </h4>
+                          <p class="fs-eight n4-color">
+                            Single source of truth for requirements, trades, and
+                            rationale; kept judges and alliance partners on the
+                            same page.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_FMEA.png"
+                          alt="FMEA risk analysis"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            FMEA (Risk)
+                          </h4>
+                          <p class="fs-eight n4-color">
+                            Top failure modes—slip, stall, mis-align—drove
+                            interlocks, current limits, and recovery routines.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_monteCarlo.png"
+                          alt="Monte Carlo modeling"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">
+                            Monte Carlo (Consistency)
+                          </h4>
+                          <p class="fs-eight n4-color">
+                            Simulated cycle variance & traffic to plan
+                            conservative, repeatable match scripts.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <!-- DESIGN ITERATIONS -->
+                  <section
+                    id="iterations"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    <h2 class="fs-two fw-semibold n5-color mb-2">
+                      Design Iterations (Mk1 → Mk3)
+                    </h2>
+                    <div class="grid-3">
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_m1.png"
+                          alt="Mk1 robot"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">Mark 1</h4>
+                          <p class="fs-eight n4-color">
+                            Baseline drive & claw; seed data; early auto
+                            testing.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_m2.png"
+                          alt="Mk2 robot"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">Mark 2</h4>
+                          <p class="fs-eight n4-color">
+                            PIDF + profiles; optical odometry; Level-2 ascent;
+                            macro v1.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img
+                          src="assets/images/robotics/robo_robot.png"
+                          alt="Mk3 robot"
+                        />
+                        <div class="body">
+                          <h4 class="fs-six n5-color fw-semibold">Mark 3</h4>
+                          <p class="fs-eight n4-color">
+                            Level-3 hang (PTO); refined claw; macro v2;
+                            reliability fixes.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <!-- OUTREACH & IMPACT -->
+                  <section
+                    id="outreach"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    <h2 class="fs-two fw-semibold n5-color mb-2">
+                      Outreach & Impact
+                    </h2>
+
+                    <!-- 1) Industry Connections -->
+                    <div class="card">
+                      <div class="body">
+                        <div class="section-tag mb-1">Industry Connections</div>
+                        <p class="fs-seven n5-color">
+                          Technical connections with
+                          <strong>GE Healthcare</strong>,
+                          <strong>Milliman</strong>,
+                          <strong>Milwaukee Tool</strong>,
+                          <strong>Elmbrook Schools</strong>,
+                          <strong>Generac</strong>, and more—focused on applying
+                          & sharing engineering practices (CAD/CNC/CF, controls,
+                          risk) with our community.
+                        </p>
+                        <p class="fs-seven n5-color">
+                          FIRST connections include the
+                          <strong>Wisconsin FIRST President</strong>, state
+                          senate members, and senior FLL/FTC/FRC mentors—helping
+                          expand FIRST involvement locally and nationally. We
+                          also advocated for
+                          <strong
+                            >structured statewide support for FIRST</strong
+                          >
+                          and for expanding
+                          <strong>DPI grant funding</strong> for Wisconsin
+                          teams.
+                        </p>
+                        <p class="fs-seven n5-color">
+                          Outreach-project connections span company executives,
+                          physicians, hospital admins, and
+                          entrepreneurs—partners in scaling programs like
+                          hospital play-therapy and digital-divide refurbishing.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- 2) FIRST Ambassadors in the community (from screenshot 1) -->
+                    <div class="card">
+                      <div class="body">
+                        <div class="section-tag mb-1">
+                          FIRST Ambassadors in the Community
+                        </div>
+                        <ul class="fs-eight n4-color">
+                          <li>
+                            Advocated at the state capitol; worked with
+                            legislators to increase
+                            <strong>DPI Robotics League funding</strong>
+                            (multi-year effort).
+                          </li>
+                          <li>
+                            Participated in Milwaukee Maker Faire (third
+                            consecutive year)—<strong
+                              >500+ makers & engineers</strong
+                            >, MPCNC demos, fabrication showcases, and FIRST
+                            outreach.
+                          </li>
+                          <li>
+                            Expanded FIRST in district: collaborated with
+                            superintendent/principal/athletic director to
+                            <strong
+                              >cover FLL & FTC registration/field costs</strong
+                            >; grew robotics programs district-wide.
+                          </li>
+                          <li>
+                            Ran a
+                            <strong>FIRST-themed Little Libraries</strong>
+                            project with March of Dimes—rookie-led; auction
+                            raised about <strong>$5,200</strong>.
+                          </li>
+                          <li>
+                            Supported the TWIST event (Women in STEM)—staffed
+                            with an <strong>all-girls team</strong> representing
+                            FTC and showcasing the robot.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <!-- 3) Community Impact (from screenshot 2) -->
+                    <div class="card">
+                      <div class="body">
+                        <div class="section-tag mb-1">Community Impact</div>
+                        <div class="grid-3">
+                          <div>
+                            <div class="kpi">200+ hrs</div>
+                            <div class="small">
+                              Hosting Rookie Team Development
+                            </div>
+                            <p class="fs-eight n4-color mt-2">
+                              21 FTC teams impacted; 5-week webinar series;
+                              on-site technical support; demos on CAD/CNC;
+                              additional FTAs; new judges.
+                            </p>
+                          </div>
+                          <div>
+                            <div class="kpi">8 projects · 29 parts</div>
+                            <div class="small">FIRST WI Production Hub</div>
+                            <p class="fs-eight n4-color mt-2">
+                              Fabrication support for FLL/FTC; 4 teams impacted;
+                              carbon-fiber/CNC capability scaled through
+                              mentors.
+                            </p>
+                          </div>
+                          <div>
+                            <div class="kpi">70+ hrs</div>
+                            <div class="small">DIY MPCNC Project</div>
+                            <p class="fs-eight n4-color mt-2">
+                              Guided rookie teams to build CNCs; piloted with
+                              teams <span class="mono">17347</span>,
+                              <span class="mono">12966 C-Gull</span>, and an FTC
+                              team from NC; improved documentation for
+                              accessibility.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 4) Closing the Digital Divide (from screenshot 3) -->
+                    <div class="card">
+                      <div class="body">
+                        <div class="section-tag mb-1">
+                          Closing the Digital Divide
+                        </div>
+                        <p class="fs-seven n5-color">
+                          <strong>1000+ impacted</strong> over four years by
+                          collecting, refurbishing, and donating laptops:
+                          <strong>44 this season</strong> (60 in prior seasons).
+                          Work expanded from local Milwaukee to national and
+                          international partners (e.g., Tech-Lit Africa).
+                        </p>
+                        <ul class="fs-eight n4-color">
+                          <li>
+                            Partnerships with school districts and IT teams;
+                            licensed Microsoft refurbisher for secure imaging.
+                          </li>
+                          <li>
+                            4-year distribution highlights: devices to FLL teams
+                            (≈19), FTC teams (≈45), STEAM Milwaukee (≈5),
+                            learning labs in Honduras & Kenya, support for
+                            SEA-Literacy refugee families, and local schools.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <!-- 5) Spreading FIRST & STEM to the Children’s Hospital (from screenshot 5) -->
+                    <div class="card">
+                      <div class="body">
+                        <div class="section-tag mb-1">
+                          Spreading FIRST & STEM to the Children’s Hospital
+                        </div>
+                        <ul class="fs-seven n5-color">
+                          <li>
+                            Co-designed play-therapy robotics sessions with
+                            child-life specialists at Children’s Hospital of
+                            Wisconsin; <strong>5 sessions this year</strong>,
+                            ~50 students impacted (≈15 total since start).
+                          </li>
+                          <li>
+                            Only team invited back to host recurring STEM/FIRST
+                            sessions; now expanding to the
+                            <strong>Veterans Association</strong> with a
+                            proposed Survivor STEM fair.
+                          </li>
+                          <li>
+                            Demonstrated FTC robots and FLL kits in hands-on
+                            activities introducing kids and families to STEM &
+                            FIRST.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
+              <!-- Modal deck viewer (keeps layout clean; no page overflow) -->
+              <div id="deckModal" class="deck-modal" hidden>
+                <div
+                  class="deck-dialog"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Team portfolio slides"
+                >
+                  <button
+                    class="deck-close btn"
+                    id="closeDeck"
+                    aria-label="Close slides"
+                  >
+                    <i class="ph ph-x"></i>
+                  </button>
+
+                  <div class="deck-stage">
+                    <div class="swiper" id="deck-swiper-modal">
+                      <div class="swiper-wrapper">
+                        <!-- 16 slides -->
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-01.jpg"
+                            alt="Slide 1"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-02.jpg"
+                            alt="Slide 2"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-03.jpg"
+                            alt="Slide 3"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-04.jpg"
+                            alt="Slide 4"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-05.jpg"
+                            alt="Slide 5"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-06.jpg"
+                            alt="Slide 6"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-07.jpg"
+                            alt="Slide 7"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-08.jpg"
+                            alt="Slide 8"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-09.jpg"
+                            alt="Slide 9"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-10.jpg"
+                            alt="Slide 10"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-11.jpg"
+                            alt="Slide 11"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-12.jpg"
+                            alt="Slide 12"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-13.jpg"
+                            alt="Slide 13"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-14.jpg"
+                            alt="Slide 14"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-15.jpg"
+                            alt="Slide 15"
+                          />
+                        </div>
+                        <div class="swiper-slide">
+                          <img
+                            src="assets/images/robotics/portfolio/slide-16.jpg"
+                            alt="Slide 16"
+                          />
+                        </div>
+                      </div>
+
+                      <!-- Swiper controls -->
+                      <div class="deck-pagination swiper-pagination"></div>
+                      <div
+                        class="deck-prev swiper-button-prev"
+                        aria-label="Previous slide"
+                      ></div>
+                      <div
+                        class="deck-next swiper-button-next"
+                        aria-label="Next slide"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div class="deck-footer">
+                    <div class="small">
+                      <span id="deckIndex">1</span>/<span id="deckTotal"
+                        >16</span
+                      >
+                    </div>
+                    <a
+                      class="btn"
+                      href="assets/images/robotics/robo_portfolio.pdf"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <i class="ph ph-download-simple"></i> Download PDF
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- footer -->
+        <section
+          class="container d-flex flex-wrap gap-3 gap-md-6 justify-content-center justify-content-sm-between align-items-center pb-4 pb-md-8 text-center mb-16 mb-lg-0"
+        >
+          <span class="fs-eight fw-medium n5-color order-sm-2"
+            >Designed by
+            <a href="index.html" class="fs-eight fw-medium n5-color"
+              >Victor Han</a
+            ></span
+          >
+          <span class="fs-eight fw-medium n5-color order-sm-1"
+            >Copyright © 2025
+            <a href="index.html" class="fs-eight fw-medium n5-color"
+              >Victor Han</a
+            >. All Rights Reserved.</span
+          >
+        </section>
+      </div>
+      <!-- /main -->
+    </div>
+
+    <script src="./assets/js/plugins/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script>
+      AOS.init({ once: true });
+
+      // TOC active link
+      const tocLinks = document.querySelectorAll(".toc a");
+      const sections = [...tocLinks]
+        .map((a) => document.querySelector(a.getAttribute("href")))
+        .filter(Boolean);
+      function setActive() {
+        let best = null,
+          bestTop = Infinity;
+        sections.forEach((sec, i) => {
+          const r = sec.getBoundingClientRect();
+          if (r.top >= -120 && r.top < bestTop) {
+            bestTop = r.top;
+            best = tocLinks[i];
+          }
+        });
+        tocLinks.forEach((a) => a.classList.remove("active"));
+        if (best) best.classList.add("active");
+      }
+      document.addEventListener("scroll", setActive, { passive: true });
+      window.addEventListener("load", setActive);
+
+      // Swiper deck
+      const deck = new Swiper("#deck-swiper", {
+        loop: true,
+        lazy: true,
+        keyboard: { enabled: true },
+        autoplay: false, // start paused; toggle with button
+        speed: 450,
+        navigation: { nextEl: ".deck-next", prevEl: ".deck-prev" },
+        pagination: { el: ".deck-pagination", clickable: true },
+        on: {
+          init(sw) {
+            const total = document.querySelectorAll().length; // ignore clones
+            document.getElementById("deckTotal").textContent = total;
+            document.getElementById("deckIndex").textContent = sw.realIndex + 1;
+          },
+          slideChange(sw) {
+            document.getElementById("deckIndex").textContent = sw.realIndex + 1;
+          },
+        },
+      });
+
+      // Open/close modal
+      const deckModal = document.getElementById("deckModal");
+      const openDeck = document.getElementById("openDeck");
+      const closeDeck = document.getElementById("closeDeck");
+      let deckSwiper = null;
+
+      function updateDeckUI(sw) {
+        const total = deckModal.querySelectorAll(
+          "#deck-swiper-modal .swiper-slide:not(.swiper-slide-duplicate)"
+        ).length;
+        document.getElementById("deckTotal").textContent = total;
+        document.getElementById("deckIndex").textContent = sw.realIndex + 1;
+      }
+
+      function openDeckModal() {
+        deckModal.hidden = false;
+        deckModal.classList.add("show");
+        // prevent background scroll without touching your layout
+        document.body.style.overflow = "hidden";
+
+        if (!deckSwiper) {
+          deckSwiper = new Swiper("#deck-swiper-modal", {
+            loop: true,
+            lazy: true,
+            speed: 400,
+            keyboard: { enabled: true },
+            navigation: { nextEl: ".deck-next", prevEl: ".deck-prev" },
+            pagination: { el: ".deck-pagination", clickable: true },
+            on: {
+              init(sw) {
+                updateDeckUI(sw);
+              },
+              slideChange(sw) {
+                updateDeckUI(sw);
+              },
+            },
+          });
+        }
+      }
+
+      function closeDeckModal() {
+        deckModal.classList.remove("show");
+        deckModal.hidden = true;
+        document.body.style.overflow = ""; // restore
+      }
+
+      openDeck.addEventListener("click", openDeckModal);
+      closeDeck.addEventListener("click", closeDeckModal);
+
+      // click backdrop to close
+      deckModal.addEventListener("click", (e) => {
+        if (e.target === deckModal) closeDeckModal();
+      });
+
+      // ESC to close
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !deckModal.hidden) closeDeckModal();
+      });
+    </script>
+  </body>
+</html>
