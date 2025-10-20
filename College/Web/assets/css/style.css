@@ -23,7 +23,7 @@ body {
 }
 
 :root {
-  --p1: 82, 113, 255;
+  --p1: 57,79,179;
   --p2: 217, 236, 227;
   --n1: 255, 255, 255;
   --n11: 255, 255, 255;
@@ -2864,7 +2864,7 @@ input:-webkit-autofill:active {
 }
 .pdg-hint__arrows {
   font-weight: 700;
-  color: rgb(var(--p1, 82, 113, 255)); /* use theme primary if present */
+  color: rgb(var(--p1, 66, 90, 204)); /* use theme primary if present */
   display: inline-flex;
   gap: 2px;
   letter-spacing: 2px;
